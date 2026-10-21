@@ -7,217 +7,254 @@
 <style>
 :root{--red:#cf2027;--dark:#a8181e;--ink:#202020;--muted:#666;--line:#e7e7e7;--soft:#fff3f3}
 *{box-sizing:border-box}
-body{font:16px/1.5 Arial,Helvetica,sans-serif;margin:0;color:var(--ink);background:#fff}
-header{padding:24px;border-bottom:1px solid var(--line);font:22px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}
-header i{font:italic 15px Georgia,serif;color:var(--red);margin-left:5px}
-main{max-width:900px;margin:45px auto;padding:0 24px}
-h1{font:50px/1.05 Impact,'Arial Narrow',sans-serif;font-weight:400;margin:0 0 12px}
-h1 em{color:var(--red);font-style:normal}
-h2{font:30px Impact,'Arial Narrow',sans-serif;font-weight:400;margin:0 0 6px}
-h3{font-size:18px;margin:26px 0 10px}
-section{border:1px solid var(--line);padding:24px;margin:22px 0}
-.sub{font-size:13px;color:var(--muted);margin:0 0 14px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-button{font:inherit;cursor:pointer}
-.primary,.secondary{padding:11px 18px;font-size:13px;font-weight:700;border:1px solid var(--red)}
+body{margin:0;background:#fff;color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}
+button,a,textarea{font:inherit}button{cursor:pointer}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #e99599;outline-offset:2px}
+a{color:var(--dark)}
+.wrap{width:min(1160px,calc(100% - 48px));margin:auto}
+header{border-bottom:1px solid var(--line)}
+.top{display:flex;min-height:80px;align-items:center;justify-content:space-between;gap:20px}
+.brand{font:26px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}
+.brand i{font:italic 17px Georgia,serif;color:var(--red);margin-left:5px}
+.who{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--muted)}
+.small{color:var(--dark);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+h1,h2{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;letter-spacing:.012em}
+.hero{padding:43px 0 20px}
+h1{font-size:clamp(44px,6vw,78px);line-height:1.02;margin:10px 0 12px}
+h1 span{color:var(--red)}
+.sub{font-size:13px;color:var(--muted);margin:4px 0 0}
+main{padding:10px 0 70px}
+.btn{padding:11px 16px;font-size:12px;font-weight:700;border:1px solid var(--red)}
 .primary{background:var(--red);color:#fff}.primary:hover{background:var(--dark)}
 .secondary{background:#fff;color:var(--dark)}
 button:disabled{opacity:.5;cursor:default}
-button:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #e99599;outline-offset:2px}
-.count{border:1px solid #edc5c7;color:var(--dark);font-size:12px;font-weight:700;padding:7px 12px;white-space:nowrap}
-.row{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;width:100%;text-align:left;background:#fff;border:1px solid var(--line);padding:14px 16px;margin-bottom:10px}
-.row:hover{border-color:var(--red);background:#fffafa}
+.inbox{border:1px solid var(--line);margin:18px 0 40px}
+.inbox-top{padding:20px 22px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line)}
+.inbox-top h2{font-size:30px;margin:0}.inbox-top p{font-size:13px;color:var(--muted);margin:5px 0 0}
+.count{border:1px solid #edc5c7;color:var(--dark);font-size:12px;font-weight:700;padding:8px 12px;white-space:nowrap}
+.inbox-item{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;width:100%;background:#fff;text-align:left;border:0;border-bottom:1px solid var(--line);padding:15px 22px}
+.inbox-item:last-child{border-bottom:0}.inbox-item:hover{background:#fff7f7}
 .kind{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--dark);text-transform:uppercase}
-.row strong{display:block;font-size:15px}
-.row small{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.inbox-item strong{display:block;font-size:14px}.inbox-item small{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.arrow{font-size:19px;color:var(--red)}
+.empty{padding:22px;color:var(--muted);font-size:13px;border:1px dashed var(--line)}
+.inbox .empty{border:0}
+.section-label{margin-top:8px}
+.section-title{font-size:34px;margin:6px 0 0}.area-title{font-size:30px;margin:26px 0 0}#area-desc{margin:4px 0 18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px;margin:20px 0 0}
+.tabs button,.filters button{border:1px solid var(--line);background:#fff;padding:11px 16px;font-size:13px;font-weight:700;color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 18px}
+.filters button{padding:8px 12px;font-size:12px}
+.filters button[aria-pressed="true"]{border-color:var(--red);color:var(--dark);background:var(--soft)}
+.list{display:grid;gap:12px}
+.row{display:grid;grid-template-columns:86px 1fr auto;gap:17px;padding:14px;background:#fff;border:1px solid var(--line);align-items:center;text-align:left;width:100%}
+.row:hover{border-color:var(--red);background:#fffafa}
+.thumb{width:86px;height:72px;background:#f7eded;display:grid;place-items:center;color:var(--dark);font-size:11px;font-weight:700;text-align:center;padding:6px}
+.thumb.video{background:#2b1a1b;color:#fff}
+.title{font-weight:700;font-size:16px;margin:0}
+.meta{font-size:12px;color:var(--muted);margin:4px 0 0}
 .status{display:inline-block;font-size:11px;background:#fff1e2;color:#8b571c;padding:6px 10px;white-space:nowrap}
-.status.approved,.status.completed{color:#206042;background:#e7f3ea}
-.status.revision{color:#a02f31;background:#fff0f0}
-.status.active{color:#4f527a;background:#edecfc}
-.empty{border:1px dashed var(--line);color:var(--muted);padding:20px;font-size:14px}
-.detail{border:1px solid var(--line);margin-top:18px}
-.detail-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:start;gap:14px}
-.detail-head h3{font:28px Impact,'Arial Narrow',sans-serif;font-weight:400;margin:4px 0 8px}
+.status.approved,.status.done{color:#206042;background:#e7f3ea}
+.status.changes{color:#a02f31;background:#fff0f0}
+.status.progress{color:#4f527a;background:#edecfc}
+.detail{border:1px solid var(--line);margin-top:24px}
+.detail-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:start;gap:16px}
+.detail-head h3{font:32px Impact,'Arial Narrow',sans-serif;font-weight:400;margin:5px 0 8px}
 .close{border:1px solid var(--line);background:#fff;padding:7px 10px}
-.detail-body{padding:20px}
-dl{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;font-size:14px;margin:0 0 14px}
+.detail-body{padding:22px}
+dl{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;font-size:13px;margin:0 0 18px}
 dt{color:var(--muted)}dd{margin:0}
-.label{font-size:11px;letter-spacing:.12em;color:var(--dark);text-transform:uppercase;font-weight:700;margin:16px 0 8px}
-.box{background:#fafafa;border:1px solid var(--line);padding:12px;white-space:pre-wrap;font-size:14px}
-textarea{width:100%;min-height:90px;padding:12px;border:1px solid #d3d3d3;font:inherit;resize:vertical}
+.label{font-size:11px;letter-spacing:.12em;color:var(--dark);text-transform:uppercase;font-weight:700;margin:17px 0 8px}
+.box{background:#fafafa;border:1px solid var(--line);padding:13px;white-space:pre-wrap;font-size:13px}
+textarea{width:100%;min-height:85px;padding:12px;border:1px solid #d3d3d3;resize:vertical}
 .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
-.msg{font-size:13px;color:var(--muted);min-height:20px;margin:12px 0 0}
+.msg{font-size:12px;color:var(--muted);min-height:18px;margin:12px 0 0}
 .msg.err{color:var(--dark)}
-.note{font-size:12px;color:var(--muted);border-left:3px solid var(--red);background:#faf8f8;padding:12px 14px}
-@media(max-width:640px){h1{font-size:38px}.row{grid-template-columns:1fr}dl{grid-template-columns:1fr}section{padding:18px}}
+.preview{display:inline-block;border:1px solid var(--red);padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;margin-top:4px}
+.note{padding:15px;border-left:3px solid var(--red);background:#faf8f8;color:#666;font-size:12px;margin-top:30px}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:700px){.wrap{width:min(100% - 30px,1160px)}.brand{font-size:21px}.brand i{font-size:14px}.row{grid-template-columns:64px 1fr;gap:10px}.thumb{width:64px;height:64px}.row .status{grid-column:2;justify-self:start}.inbox-item{grid-template-columns:1fr auto;padding:13px 16px;gap:8px}.kind{grid-column:1/-1}dl{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header>CREATIONS <i>by Digital Ph</i></header>
-<main>
-  <div class="top">
-    <h1>Your <em>workspace.</em></h1>
-    <button class="secondary" id="signout" type="button">Sign out</button>
-  </div>
-  <p id="account" class="sub">Checking account...</p>
+<header><div class="wrap top">
+  <div class="brand">CREATIONS <i>by Digital Ph</i></div>
+  <div class="who"><span id="account">Checking account...</span><button class="btn secondary" id="signout" type="button">Sign out</button></div>
+</div></header>
 
-  <section aria-label="Client action required">
-    <div class="top">
-      <div><div class="kind">Your priority inbox</div><h2>Client Action Required</h2>
-      <p class="sub" style="margin:0">Items waiting for your review or decision. Select one to open it.</p></div>
+<section class="wrap hero">
+  <div class="small" id="client-line">Client workspace</div>
+  <h1>Your work, <span>all in one place.</span></h1>
+  <p class="sub">Review content, respond to business requests, and follow campaign updates without searching through separate conversations.</p>
+</section>
+
+<main class="wrap">
+  <section class="inbox" aria-label="Client action required">
+    <div class="inbox-top">
+      <div><div class="small">Your priority inbox</div><h2>Client Action Required</h2><p>Items waiting for your review or decision. Select one to open it.</p></div>
       <span class="count" id="count">0 items</span>
     </div>
-    <div id="waiting" style="margin-top:16px">Loading...</div>
-    <div id="detail-slot"></div>
+    <div id="waiting"><div class="empty">Loading...</div></div>
   </section>
 
-  <section aria-label="Other items">
-    <h2>Other items</h2>
-    <p class="sub">Items you have already answered, and updates on work in progress.</p>
-    <div id="others">Loading...</div>
-  </section>
+    <h2 class="section-title">Your workspace</h2>
+  <p class="sub">Choose a category, then select an item to see its details.</p>
 
-  <section aria-label="Assigned client workspaces">
-    <h2>Assigned client workspaces</h2>
-    <div id="list">Checking...</div>
-  </section>
+  <nav class="tabs" role="tablist" aria-label="Workspace areas" id="tabs">
+    <button type="button" role="tab" data-cat="content_approval" aria-selected="true">Content Approvals</button>
+    <button type="button" role="tab" data-cat="business_support" aria-selected="false">Business Support</button>
+    <button type="button" role="tab" data-cat="campaign" aria-selected="false">Campaigns</button>
+  </nav>
+  <h2 class="area-title" id="area-title">Content Approvals</h2>
+  <p class="sub" id="area-desc"></p>
+  <div class="filters" id="filters" aria-label="Filter by status"></div>
+  <div class="list" id="list" aria-live="polite"></div>
+  <div id="detail-slot"></div>
 
-  <p class="note">Your decisions are saved securely and your team can see them. Notion synchronization is not connected yet.</p>
+  <p class="note">Your decisions are saved securely and your team can see them.</p>
 </main>
+<footer><div class="wrap">Creations by Digital PH · Client Workspace</div></footer>
 
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const sb = window.supabase.createClient(PORTAL_CONFIG.url, PORTAL_CONFIG.key);
-
-const statusLabel = {draft:'Draft',for_approval:'For approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
-const statusClass = {for_approval:'',approved:'approved',changes_requested:'revision',in_progress:'active',done:'completed'};
-const catLabel = {content_approval:'Content approval',business_support:'Business support',campaign:'Campaign decision'};
-
 const $ = id => document.getElementById(id);
+
+const statusLabel = {for_approval:'For approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
+const statusClass = {for_approval:'',approved:'approved',changes_requested:'changes',in_progress:'progress',done:'done'};
+const catLabel = {content_approval:'Content approval',business_support:'Business support',campaign:'Campaign decision'};
+const filtersByCat = {
+  content_approval:[['all','All content'],['for_approval','For Approval'],['approved','Approved Tasks'],['changes_requested','Revision Requests']],
+  business_support:[['all','All requests'],['for_approval','Needs Attention'],['in_progress','In Progress'],['done','Completed']],
+  campaign:[['all','All campaigns'],['for_approval','Awaiting Feedback'],['in_progress','In Progress'],['done','Completed']]
+};
+const areaInfo = {
+  content_approval:['Content Approvals','Review graphics, carousel posts and reels before they go live.'],
+  business_support:['Business Support','Email requests, Meta account concerns, billing questions and other coordination.'],
+  campaign:['Campaigns','Track campaign concepts, proposals, timelines and decisions.']
+};
+
+let tasks = [], cat = 'content_approval', filter = 'all', openId = null;
+
 function el(tag, cls, text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined&&text!==null)n.textContent=text;return n}
 function fmtDate(d){return d?new Date(d+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'No date set'}
 function safeUrl(v){try{const u=new URL(v);return (u.protocol==='https:'||u.protocol==='http:')?u.href:null}catch(e){return null}}
+function thumbText(t){
+  if(t.category==='content_approval') return t.format==='Reel'?'▶ REEL':t.format==='Carousel'?'CAROUSEL':'CREATIVE';
+  return t.category==='campaign'?'CAMPAIGN':'REQUEST';
+}
+function metaText(t){
+  const parts=[]; if(t.platform) parts.push(t.platform); parts.push(fmtDate(t.due_date)); return parts.join(' · ');
+}
+function pill(t){return el('span','status '+(statusClass[t.status]||''),statusLabel[t.status]||t.status)}
 
-let tasks = [];
-let openId = null;
-let multiClient = false;
-
-function row(t){
-  const b = el('button','row'); b.type = 'button';
-  const body = el('div');
-  const client = multiClient && t.clients && t.clients.name ? t.clients.name + ' · ' : '';
-  body.append(
-    el('span','kind',catLabel[t.category]||'Item'),
-    el('strong',null,t.title),
-    el('small',null,client+(t.platform?t.platform+' · ':'')+fmtDate(t.due_date))
-  );
-  b.append(body, el('span','status '+(statusClass[t.status]||''), statusLabel[t.status]||t.status));
+function inboxRow(t){
+  const b=el('button','inbox-item'); b.type='button';
+  const body=el('div'); body.append(el('strong',null,t.title),el('small',null,metaText(t)));
+  b.append(el('span','kind',catLabel[t.category]||'Item'),body,el('span','arrow','→'));
+  b.addEventListener('click',()=>{cat=t.category;filter='all';openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
+  return b;
+}
+function listRow(t){
+  const b=el('button','row'); b.type='button';
+  const mid=el('div'); mid.append(el('h3','title',t.title),el('p','meta',metaText(t)));
+  b.append(el('div','thumb'+(t.format==='Reel'?' video':''),thumbText(t)),mid,pill(t));
   b.addEventListener('click',()=>{openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
   return b;
 }
 
 function detail(t){
-  const d = el('div','detail');
-  const head = el('div','detail-head');
-  const l = el('div');
-  l.append(el('div','kind',catLabel[t.category]||''), el('h3',null,t.title), el('span','status '+(statusClass[t.status]||''), statusLabel[t.status]||t.status));
-  const close = el('button','close','✕ Close'); close.type='button';
+  const d=el('section','detail');
+  const head=el('div','detail-head'); const l=el('div');
+  l.append(el('div','kind',catLabel[t.category]||''),el('h3',null,t.title),pill(t));
+  const close=el('button','close','✕ Close'); close.type='button';
   close.addEventListener('click',()=>{openId=null;render()});
-  head.append(l, close);
+  head.append(l,close);
 
-  const body = el('div','detail-body');
-  const dl = el('dl');
-  const field = (k,v)=>{if(v){dl.append(el('dt',null,k),el('dd',null,v))}};
+  const body=el('div','detail-body'); const dl=el('dl');
+  const field=(k,v)=>{if(v){dl.append(el('dt',null,k),el('dd',null,v))}};
   field('Format',t.format); field('Platforms',t.platform); field('Date',fmtDate(t.due_date));
   body.append(dl);
-  if(t.details) body.append(el('div','label','Details'), el('div','box',t.details));
-  const link = safeUrl(t.preview_url);
+  if(t.details) body.append(el('div','label','Captions'),el('div','box',t.details));
+  const link=safeUrl(t.preview_url);
   if(link){
-    const a = el('a',null,'Open the full preview ↗'); a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
-    a.style.display='inline-block'; a.style.marginTop='14px'; body.append(a);
+    body.append(el('div','label','Preview'));
+    const a=el('a','preview','Open the full creative ↗'); a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
+    body.append(a);
   }
-  if(t.client_feedback) body.append(el('div','label','Feedback on record'), el('div','box',t.client_feedback));
+  if(t.client_feedback) body.append(el('div','label','Feedback on record'),el('div','box',t.client_feedback));
 
-  const msg = el('p','msg'); msg.setAttribute('role','status');
-
+  const msg=el('p','msg'); msg.setAttribute('role','status');
   if(t.status==='for_approval'){
     body.append(el('div','label','Your feedback'));
-    const ta = el('textarea'); ta.placeholder='Describe the changes you would like (required if you request changes)...';
-    const actions = el('div','actions');
-    const ok = el('button','primary','Approve'); const chg = el('button','secondary','Request changes');
-    ok.type = chg.type = 'button';
-    const send = async decision => {
-      const note = ta.value.trim();
-      msg.className='msg';
-      if(decision==='changes_requested' && !note){msg.className='msg err';msg.textContent='Please describe the changes you would like.';return}
-      ok.disabled = chg.disabled = true; msg.textContent='Saving...';
-      const r = await sb.rpc('respond_to_task',{p_task_id:t.id,p_decision:decision,p_note:note||null});
+    const ta=el('textarea'); ta.placeholder='Describe the changes you would like (required if you request changes)...';
+    const actions=el('div','actions');
+    const ok=el('button','btn primary','Approve'); const chg=el('button','btn secondary','Request changes');
+    ok.type=chg.type='button';
+    const send=async decision=>{
+      const note=ta.value.trim(); msg.className='msg';
+      if(decision==='changes_requested'&&!note){msg.className='msg err';msg.textContent='Please describe the changes you would like.';return}
+      ok.disabled=chg.disabled=true; msg.textContent='Saving...';
+      const r=await sb.rpc('respond_to_task',{p_task_id:t.id,p_decision:decision,p_note:note||null});
       if(r.error){msg.className='msg err';msg.textContent='Could not save your decision. '+(r.error.message||'');ok.disabled=chg.disabled=false;return}
       await loadTasks(decision==='approved'?'Approved. Your team can now see your decision.':'Changes requested. Your team can now see your note.');
     };
-    ok.addEventListener('click',()=>send('approved'));
-    chg.addEventListener('click',()=>send('changes_requested'));
-    actions.append(ok,chg);
-    body.append(ta,actions);
+    ok.addEventListener('click',()=>send('approved')); chg.addEventListener('click',()=>send('changes_requested'));
+    actions.append(ok,chg); body.append(ta,actions);
   }
-  body.append(msg);
-  d.append(head,body);
-  return d;
+  body.append(msg); d.append(head,body); return d;
 }
 
 function render(flash){
-  const waiting = tasks.filter(t=>t.status==='for_approval');
-  const others = tasks.filter(t=>t.status!=='for_approval');
-  $('count').textContent = waiting.length+(waiting.length===1?' item':' items');
+  const waiting=tasks.filter(t=>t.status==='for_approval');
+  $('count').textContent=waiting.length+(waiting.length===1?' item':' items');
+  const w=$('waiting'); w.replaceChildren();
+  if(!waiting.length) w.append(el('div','empty','You are all caught up. No decisions are waiting.'));
+  waiting.forEach(t=>w.append(inboxRow(t)));
 
-  $('waiting').replaceChildren();
-  if(!waiting.length) $('waiting').append(el('div','empty','You are all caught up. No decisions are waiting.'));
-  waiting.forEach(t=>$('waiting').append(row(t)));
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.cat===cat)));
+  $('area-title').textContent=areaInfo[cat][0]; $('area-desc').textContent=areaInfo[cat][1];
+  const f=$('filters'); f.replaceChildren();
+  filtersByCat[cat].forEach(([value,label])=>{
+    const b=el('button',null,label); b.type='button'; b.setAttribute('aria-pressed',String(value===filter));
+    b.addEventListener('click',()=>{filter=value;openId=null;render()}); f.append(b);
+  });
 
-  $('others').replaceChildren();
-  if(!others.length) $('others').append(el('div','empty','Nothing here yet.'));
-  others.forEach(t=>$('others').append(row(t)));
+  const list=tasks.filter(t=>t.category===cat&&(filter==='all'||t.status===filter));
+  const l=$('list'); l.replaceChildren();
+  if(!list.length) l.append(el('div','empty','No items in this section yet.'));
+  list.forEach(t=>l.append(listRow(t)));
 
   $('detail-slot').replaceChildren();
-  const open = tasks.find(t=>t.id===openId);
-  if(open){
-    const d = detail(open);
-    if(flash){const m=d.querySelector('.msg');if(m)m.textContent=flash}
-    $('detail-slot').append(d);
-  }
+  const open=tasks.find(t=>t.id===openId);
+  if(open){const d=detail(open); if(flash){const m=d.querySelector('.msg'); if(m) m.textContent=flash} $('detail-slot').append(d)}
 }
 
 async function loadTasks(flash){
-  const r = await sb.from('portal_tasks').select('*, clients(name)').order('due_date',{ascending:true,nullsFirst:false});
+  const r=await sb.from('portal_tasks').select('*').order('due_date',{ascending:true,nullsFirst:false});
   if(r.error){
-    const msg = 'Your items are not ready yet. Please contact the portal administrator.';
-    $('waiting').replaceChildren(el('div','empty',msg));
-    $('others').replaceChildren();
-    $('count').textContent='0 items';
-    return;
+    $('waiting').replaceChildren(el('div','empty','Your items are not ready yet. Please contact the portal administrator.'));
+    $('list').replaceChildren(); $('count').textContent='0 items'; return;
   }
-  tasks = r.data||[];
-  render(flash);
+  tasks=r.data||[]; render(flash);
 }
 
-async function start(){
-  const {data:{user},error} = await sb.auth.getUser();
-  if(error||!user){location.replace('login.html');return}
-  $('account').textContent = 'Signed in as '+(user.email||'account');
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.cat;filter='all';openId=null;render()}));
 
-  const m = await sb.from('client_memberships').select('client_id,role,clients(name)').eq('user_id',user.id);
-  const list = $('list'); list.replaceChildren();
-  if(m.error){list.textContent='Workspace access cannot be loaded yet. Contact the administrator.'}
-  else if(!m.data||!m.data.length){list.textContent='No workspace assigned yet.'}
-  else{
-    multiClient = m.data.length>1;
-    m.data.forEach(x=>{const p=el('p',null,(x.clients&&x.clients.name?x.clients.name:'Client')+' · '+x.role);list.append(p)});
+async function start(){
+  const {data:{user},error}=await sb.auth.getUser();
+  if(error||!user){location.replace('login.html');return}
+  $('account').textContent=user.email||'Signed in';
+  const m=await sb.from('client_memberships').select('clients(name)').eq('user_id',user.id);
+  if(!m.error&&m.data&&m.data.length){
+    const names=m.data.map(x=>x.clients&&x.clients.name).filter(Boolean);
+    if(names.length) $('client-line').textContent='Client workspace / '+names.join(', ');
   }
   await loadTasks();
 }
-
-$('signout').onclick = async()=>{await sb.auth.signOut();location.replace('login.html')};
+$('signout').onclick=async()=>{await sb.auth.signOut();location.replace('login.html')};
 start();
 </script>
 </body>
