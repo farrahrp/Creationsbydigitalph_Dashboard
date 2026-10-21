@@ -1,28 +1,14 @@
--- CLIENT WORKSPACE SCHEMA v3 (clients + memberships + approval tasks)
--- Safe to rerun. Existing tables and rows are retained; incompatible existing
--- table shapes should be reviewed before running this migration.
--- Run in Supabase: SQL Editor > New query > paste all > Run
+-- CLIENT WORKSPACE SCHEMA v2 (matches your index.html: clients + client_memberships)
+-- Safe to run more than once. Run in Supabase: SQL Editor > New query > paste all > Run
 
 -- 1. CLIENTS + MEMBERSHIPS (reuses yours if they already exist)
 create table if not exists public.clients (
   id bigint generated always as identity primary key,
   name text not null,
-  slug text,
+  slug text unique,
   created_at timestamptz not null default now()
 );
 alter table public.clients add column if not exists slug text;
-
--- Existing clients tables may predate the slug column. Keep slug unique so it
--- can be used as a stable setup/admin reference.
-do $$
-begin
-  if exists (
-    select 1 from public.clients where slug is not null group by slug having count(*) > 1
-  ) then
-    raise exception 'Duplicate client slugs exist. Resolve them before applying this schema.';
-  end if;
-end $$;
-create unique index if not exists clients_slug_unique on public.clients (slug) where slug is not null;
 
 -- id type of clients, so the new tables match whatever you already have
 do $$
@@ -41,9 +27,6 @@ begin
         primary key (client_id, user_id)
       )$f$, idtype);
   end if;
-
-  -- Preserve existing memberships while supplying the role used by dashboard.html.
-  alter table public.client_memberships add column if not exists role text not null default 'client';
 
   if to_regclass('public.portal_tasks') is null then
     execute format($f$
@@ -87,11 +70,9 @@ create table if not exists public.portal_admins (
 
 -- 2. FUNCTIONS
 create or replace function public.is_admin()
-returns boolean language sql stable security definer set search_path = '' as $$
+returns boolean language sql stable security definer set search_path = public as $$
   select exists (select 1 from public.portal_admins where user_id = auth.uid());
 $$;
-revoke all on function public.is_admin() from public, anon;
-grant execute on function public.is_admin() to authenticated;
 
 create or replace function public.touch_updated_at()
 returns trigger language plpgsql as $$
@@ -103,11 +84,11 @@ for each row execute function public.touch_updated_at();
 
 -- the ONLY way a client changes a task: approve, or request changes with a note
 create or replace function public.respond_to_task(p_task_id bigint, p_decision text, p_note text default null)
-returns public.portal_tasks language plpgsql security definer set search_path = '' as $$
+returns public.portal_tasks language plpgsql security definer set search_path = public as $$
 declare t public.portal_tasks;
 begin
   if auth.uid() is null then raise exception 'Please log in'; end if;
-  if p_decision is null or p_decision not in ('approved','changes_requested') then
+  if p_decision not in ('approved','changes_requested') then
     raise exception 'Invalid decision';
   end if;
   if p_decision = 'changes_requested' and coalesce(btrim(p_note),'') = '' then
@@ -140,22 +121,6 @@ alter table public.client_memberships enable row level security;
 alter table public.portal_tasks enable row level security;
 alter table public.portal_task_events enable row level security;
 alter table public.portal_admins enable row level security;
-
--- Explicit API grants keep reads available to signed-in users and leave client
--- and membership writes to the service role/SQL editor. Task writes remain
--- guarded by the admin-only RLS policy below.
-revoke all on public.clients, public.client_memberships, public.portal_tasks,
-  public.portal_task_events, public.portal_admins from anon, authenticated;
-grant select on public.clients, public.client_memberships, public.portal_task_events to authenticated;
-grant select, insert, update, delete on public.portal_tasks to authenticated;
-do $$
-declare seq_name text;
-begin
-  seq_name := pg_get_serial_sequence('public.portal_tasks', 'id');
-  if seq_name is not null then
-    execute format('grant usage, select on sequence %s to authenticated', seq_name::regclass);
-  end if;
-end $$;
 
 drop policy if exists "wp own membership" on public.client_memberships;
 create policy "wp own membership" on public.client_memberships for select to authenticated
