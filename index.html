@@ -21,7 +21,7 @@
 .secure-workspace{padding:40px 0 90px}.secure-top{display:flex;gap:18px;justify-content:space-between;align-items:start;border-bottom:1px solid var(--line);padding-bottom:24px}.secure-top h2{font:36px Impact,Arial,sans-serif;margin:6px 0}.secure-top p{color:var(--muted);font-size:13px}.secure-content{padding:25px 0}.secure-content h3{font-size:18px}.workspace-card{border:1px solid var(--line);padding:15px;margin-bottom:8px}.workspace-card strong{display:block}.workspace-card span{font-size:12px;color:var(--muted)}.secure-empty{border:1px dashed var(--line);padding:20px;color:var(--muted)}
 </style>
 </head>
-<body>
+<body><script>(function(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));if(q.has("code")||h.has("access_token")||h.has("error")||q.get("type")==="invite"||q.get("type")==="recovery"){location.replace("setup-password.html"+location.search+location.hash);}})();</script>
 <header><div class="wrap top"><div class="brand">CREATIONS <i>by Digital Ph</i></div><div class="header-actions"><span class="demo">PORTAL PREVIEW</span><button type="button" class="login-button" id="open-login">Log in</button></div></div></header>
 <section id="public-home" aria-label="Public client portal preview">
   <div class="wrap public-hero"><div class="smallcaps">Creations by Digital PH / Client Collaboration</div><h1>Your content. <span>Your decisions.</span></h1><p>One organized place to review upcoming posts, share feedback, and stay aligned on the work that matters.</p></div>
@@ -190,5 +190,5 @@ document.querySelectorAll('[data-area]').forEach(b=>b.addEventListener('click',(
  client.auth.getUser().then(({data,error})=>{if(!error&&data?.user){signedInView(data.user).then(()=>{if(landingAuthFlow)passwordPrompt()});}});
 })();
 </script>
-</body>
+<script>document.getElementById("open-login").addEventListener("click",()=>location.href="login.html");document.getElementById("preview-login").addEventListener("click",()=>location.href="login.html");</script></body>
 </html>
