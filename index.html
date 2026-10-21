@@ -15,10 +15,29 @@
 .action-count{border:1px solid #edc5c7;color:var(--darkred);font-size:12px;font-weight:bold;padding:8px 12px;white-space:nowrap}
 .action-list{display:grid}.action-item{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;width:100%;background:#fff;text-align:left;border:0;border-bottom:1px solid var(--line);padding:15px 22px;cursor:pointer}.action-item:last-child{border-bottom:0}.action-item:hover,.action-item:focus-visible{background:#fff7f7}.action-type{font-size:10px;font-weight:bold;letter-spacing:.09em;color:var(--darkred);text-transform:uppercase}.action-item strong{display:block;font-size:14px}.action-item small{display:block;font-size:12px;color:var(--muted);margin-top:3px}.action-arrow{font-size:19px;color:var(--red)}.action-empty{padding:22px;color:var(--muted);font-size:13px}
 @media(max-width:700px){.action-inbox-top{padding:16px}.action-item{grid-template-columns:1fr auto;padding:13px 16px;gap:8px}.action-type{grid-column:1/-1}.action-arrow{grid-column:2;grid-row:2}.action-count{font-size:10px}}
+
+/* Public landing and demonstration entry */
+[hidden]{display:none!important}.header-actions{display:flex;align-items:center;gap:14px}.login-button{padding:11px 23px;border:1px solid var(--red);background:var(--red);color:#fff;font-weight:700;font-size:13px}.login-button:hover,.primary:hover{background:var(--darkred)}.public-hero{padding:65px 0 35px}.public-hero h1{max-width:900px}.public-hero p{max-width:650px;font-size:16px;color:var(--muted)}.landing-preview{padding:17px 0 75px}.preview-title{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}.preview-title h2{font-size:34px;margin:0}.preview-title p{color:var(--muted);font-size:13px;margin:4px 0 0}.preview-label{color:var(--darkred);font-size:11px;letter-spacing:.08em;font-weight:700}.sample-tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px;margin:20px 0 26px}.sample-tabs span{display:inline-block;border:1px solid var(--line);padding:10px 15px;font-size:13px;font-weight:700}.sample-tabs span:first-child{background:var(--red);border-color:var(--red);color:#fff}.sample-list{display:grid;gap:12px}.sample-row{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:15px;border:1px solid var(--line)}.sample-thumb{width:76px;height:62px;background:#f8ebeb;color:var(--darkred);display:grid;place-items:center;font-size:10px;font-weight:700;text-align:center}.sample-row strong{display:block}.sample-row small{color:var(--muted);display:block;margin-top:4px}.sample-footer{margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}.sample-footer p{font-size:12px;color:var(--muted)}dialog.login-modal{width:min(480px,calc(100% - 32px));padding:0;border:1px solid var(--line);box-shadow:0 24px 90px #0003;background:#fff;color:var(--ink)}dialog::backdrop{background:#16161696}.login-head{display:flex;justify-content:space-between;align-items:center;padding:25px 28px 0}.login-modal h2{font-size:37px;margin:8px 28px}.login-modal .login-copy{color:var(--muted);font-size:13px;margin:0 28px 18px}.login-form{padding:0 28px 25px}.login-form label{display:block;margin:12px 0 5px;font-size:12px;font-weight:700}.login-form input{width:100%;border:1px solid var(--line);padding:12px;font:inherit;background:#f9f9f9}.login-form input:disabled{opacity:.7}.login-form .primary{width:100%;margin-top:18px}.login-note{margin:15px 0 0;font-size:12px;color:var(--muted);line-height:1.6}.modal-close{border:1px solid var(--line);background:#fff;padding:7px 11px}.demo-entry{padding:17px 28px 28px;border-top:1px solid var(--line)}.demo-entry p{font-size:12px;color:var(--muted);margin:0 0 12px}.demo-entry button{width:100%}.dashboard-top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid var(--line)}.dashboard-top span{color:var(--muted);font-size:12px}@media(max-width:650px){.public-hero{padding:35px 0 25px}.sample-row{grid-template-columns:60px 1fr;gap:10px}.sample-thumb{width:60px;height:60px}.sample-row .status{grid-column:2;justify-self:start}.brand{font-size:19px}.brand i{font-size:12px}.login-button{padding:9px 12px}.preview-title h2{font-size:28px}}
 </style>
 </head>
 <body>
-<header><div class="wrap top"><div class="brand">CREATIONS <i>by Digital Ph</i></div><span class="demo">CLIENT WORKSPACE · DEMO</span></div></header>
+<header><div class="wrap top"><div class="brand">CREATIONS <i>by Digital Ph</i></div><div class="header-actions"><span class="demo">PORTAL PREVIEW</span><button type="button" class="login-button" id="open-login">Log in</button></div></div></header>
+<section id="public-home" aria-label="Public client portal preview">
+  <div class="wrap public-hero"><div class="smallcaps">Creations by Digital PH / Client Collaboration</div><h1>Your content. <span>Your decisions.</span></h1><p>One organized place to review upcoming posts, share feedback, and stay aligned on the work that matters.</p></div>
+  <div class="wrap landing-preview">
+    <div class="preview-title"><div><div class="preview-label">PREVIEW YOUR CLIENT EXPERIENCE</div><h2>Your workspace</h2><p>Here's a glimpse of the tasks your team could manage in the portal.</p></div><span class="demo">SAMPLE DATA</span></div>
+    <div class="sample-tabs" aria-label="Sample workspace categories"><span>Content Approvals</span><span>Business Support</span><span>Campaigns</span></div>
+    <div class="sample-list">
+      <div class="sample-row"><div class="sample-thumb">CREATIVE</div><div><strong>Product Feature Spotlight</strong><small>Facebook & Instagram · Example scheduled post</small></div><span class="status">For approval</span></div>
+      <div class="sample-row"><div class="sample-thumb">CAROUSEL</div><div><strong>Educational Carousel</strong><small>Facebook & Instagram · Example review item</small></div><span class="status">For approval</span></div>
+      <div class="sample-row"><div class="sample-thumb">▶ REEL</div><div><strong>Quick Tips Reel</strong><small>Instagram · Example video review</small></div><span class="status approved">Approved</span></div>
+    </div>
+    <div class="sample-footer"><p>Illustrative items only. Actual client content is never displayed publicly.</p><button class="primary" type="button" id="preview-login">Log in to your workspace →</button></div>
+  </div>
+</section>
+<dialog id="login-modal" class="login-modal" aria-labelledby="login-title"><div class="login-head"><div class="smallcaps">CLIENT ACCESS</div><button type="button" class="modal-close" id="close-login" aria-label="Close login">✕</button></div><h2 id="login-title">Client login</h2><p class="login-copy">Sign in to review your team's content and requests.</p><div class="login-form"><label for="login-email">Email address</label><input id="login-email" type="email" autocomplete="off" placeholder="Email" disabled><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="off" placeholder="Password" disabled><button type="button" class="primary" disabled>Log in (coming soon)</button><p class="login-note">Secure client accounts are not enabled yet. Please do not enter passwords on this demonstration website.</p></div><div class="demo-entry"><p>Want to see how the client dashboard works? Explore with fictional sample tasks.</p><button type="button" class="secondary" id="enter-demo">Explore sample workspace →</button></div></dialog>
+<div id="dashboard" hidden>
+<div class="wrap dashboard-top"><span>Sample Client · Demonstration workspace</span><button type="button" class="secondary" id="exit-demo">← Back to homepage</button></div>
 <section class="hero"><div class="wrap"><div class="smallcaps">Client workspace / Sample client</div><h1>Your work, <span>all in one place.</span></h1><p>Review content, respond to business requests, and follow campaign updates without searching through separate conversations.</p><div class="chips"><span class="chip">Sample client</span><span class="chip">Content · Support · Campaigns</span></div></div></section>
 <main class="wrap main">
 <h2 class="section-title">At a glance</h2><p class="section-intro">A quick view of items in your sample workspace.</p>
@@ -44,8 +63,20 @@
 <div class="notice"><strong>Public demo:</strong> This page uses fictional tasks. No authentication or Notion synchronization is connected. Demo approval changes reset on reload. Do not add private client details or credentials to this public GitHub repository.</div>
 </section>
 </main>
+</div>
 <footer><div class="wrap">Creations by Digital PH · Client Workspace · Demonstration</div></footer>
 <script>
+
+// This is demo navigation, NOT authentication or access control.
+const loginModal=document.getElementById('login-modal');
+function showLogin(){loginModal.showModal();}
+function showPublic(){document.getElementById('dashboard').hidden=true;document.getElementById('public-home').hidden=false;document.getElementById('open-login').hidden=false;window.scrollTo(0,0)}
+document.getElementById('open-login').addEventListener('click',showLogin);
+document.getElementById('preview-login').addEventListener('click',showLogin);
+document.getElementById('close-login').addEventListener('click',()=>loginModal.close());
+document.getElementById('enter-demo').addEventListener('click',()=>{loginModal.close();document.getElementById('public-home').hidden=true;document.getElementById('dashboard').hidden=false;document.getElementById('open-login').hidden=true;window.scrollTo(0,0)});
+document.getElementById('exit-demo').addEventListener('click',showPublic);
+
 // Public fictional demo. Replace the empty asset links with authorized PUBLIC URLs only.
 // For real private creative files, wait until secure login and authorized access are implemented.
 const items=[
