@@ -33,7 +33,7 @@ a{color:#a8181e}
 <h1>Client <em>login.</em></h1>
 <section id="login-view" aria-label="Sign in">
 <p>Sign in to your assigned client workspace.</p>
-<p class="help">First time here? Open your invitation email to set your password. If you already opened the invitation, use the password email option below.</p>
+<p class="help">First time here? Open your invitation email to set your password. If it expired before you finished, ask the administrator to resend the invitation.</p>
 <form id="login-form">
 <label for="email">Email</label>
 <input id="email" name="email" type="email" required autocomplete="username" inputmode="email">
@@ -43,15 +43,15 @@ a{color:#a8181e}
 </form>
 <p class="msg" id="msg" role="status" aria-live="polite"></p>
 <p id="session-actions" hidden><a href="setup-password.html">Set your password using your active invitation session</a> · <a href="dashboard.html">Open dashboard</a></p>
-<button id="show-reset" class="text-button" type="button" aria-expanded="false" aria-controls="reset-view">Set or reset password by email</button>
+<button id="show-reset" class="text-button" type="button" aria-expanded="false" aria-controls="reset-view">Forgot your password? Email me a reset link</button>
 </section>
 <section id="reset-view" class="panel" aria-label="Request a password email" hidden>
-<h2>Send a password setup email</h2>
-<p class="help">Enter the email address you were invited with. The email link will open a page where you can choose a new password.</p>
+<h2>Reset your password by email</h2>
+<p class="help">Enter the email address for your portal account. If the account exists, we’ll send a link to choose a new password. For an expired invitation, contact the administrator.</p>
 <form id="reset-form">
-<label for="reset-email">Invited email</label>
+<label for="reset-email">Account email</label>
 <input id="reset-email" name="reset-email" type="email" required autocomplete="email" inputmode="email">
-<button id="send-reset" type="submit">Send password email</button>
+<button id="send-reset" type="submit">Send password reset email</button>
 </form>
 <p class="msg" id="reset-msg" role="status" aria-live="polite"></p>
 <button id="back-to-login" class="secondary" type="button">Back to sign in</button>
@@ -164,7 +164,7 @@ a{color:#a8181e}
         redirectTo:"https://farrahrp.github.io/Creationsbydigitalph_Dashboard/setup-password.html"
       });
       if(error)throw error;
-      resetMsg.textContent="If this account exists, a password email has been sent. Open its link to choose a new password, then return here to sign in.";
+      resetMsg.textContent="If an account exists, a password reset email has been sent. Open its link to choose a new password, then return here to sign in.";
     }catch(error){
       resetMsg.textContent="Could not send the password email: "+(error?.message||"Please try again later.");
     }finally{
