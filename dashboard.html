@@ -126,7 +126,7 @@ const statusLabel = {for_approval:'For approval',approved:'Approved',changes_req
 const statusClass = {for_approval:'',approved:'approved',changes_requested:'changes',in_progress:'progress',done:'done'};
 const catLabel = {content_approval:'Content approval',business_support:'Business support',campaign:'Campaign decision'};
 const filtersByCat = {
-  content_approval:[['all','All content'],['for_approval','For Approval'],['approved','Approved Tasks'],['changes_requested','Revision Requests']],
+  content_approval:[['all','All content'],['for_approval','For Approval'],['approved','Approved Tasks'],['revision','Revision Requests']],
   business_support:[['all','All requests'],['for_approval','Needs Attention'],['in_progress','In Progress'],['done','Completed']],
   campaign:[['all','All campaigns'],['for_approval','Awaiting Feedback'],['in_progress','In Progress'],['done','Completed']]
 };
@@ -148,11 +148,16 @@ function thumbText(t){
 function metaText(t){
   const parts=[]; if(t.platform) parts.push(t.platform); parts.push(fmtDate(t.due_date)); return parts.join(' · ');
 }
-function pill(t){return el('span','status '+(statusClass[t.status]||''),statusLabel[t.status]||t.status)}
+function isRevision(t){return t.status==='for_approval'&&t.revision_requested===true}
+function matchesFilter(t,f){return f==='all'||(f==='revision'?isRevision(t):t.status===f)}
+function pill(t){
+  if(isRevision(t)) return el('span','status changes','Revision requested');
+  return el('span','status '+(statusClass[t.status]||''),statusLabel[t.status]||t.status);
+}
 
 function inboxRow(t){
   const b=el('button','inbox-item'); b.type='button';
-  const body=el('div'); body.append(el('strong',null,t.title),el('small',null,metaText(t)));
+  const body=el('div'); body.append(el('strong',null,t.title),el('small',null,metaText(t)+(isRevision(t)?' · Revision requested':'')));
   b.append(el('span','kind',catLabel[t.category]||'Item'),body,el('span','arrow','→'));
   b.addEventListener('click',()=>{cat=t.category;filter='all';openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
   return b;
@@ -184,7 +189,18 @@ function detail(t){
     const a=el('a','preview','Open the full creative ↗'); a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
     body.append(a);
   }
-  if(t.client_feedback) body.append(el('div','label','Feedback on record'),el('div','box',t.client_feedback));
+  const slides=Array.isArray(t.creative_assets)?t.creative_assets.map(x=>typeof x==='string'?{url:x}:x).filter(x=>x&&safeUrl(x.url)):[];
+  if(slides.length){
+    body.append(el('div','label','Creative assets ('+slides.length+(t.format==='Carousel'?' slides':' files')+')'));
+    const ul=el('div','box');
+    slides.forEach((x,i)=>{
+      const a2=el('a','preview',(x.label||((t.format==='Carousel'?'Slide ':'File ')+(i+1)))+' ↗'); a2.href=safeUrl(x.url); a2.target='_blank'; a2.rel='noopener noreferrer';
+      a2.style.display='block'; a2.style.margin='4px 0'; ul.append(a2);
+    });
+    body.append(ul);
+  }
+  if(isRevision(t)) body.append(el('div','label','Revision requested'),el('div','box','You asked for changes. Your team has your comment and will send an updated version. You can still approve this item or add another note below.'));
+  if(t.client_feedback) body.append(el('div','label',isRevision(t)?'Your revision comment':'Feedback on record'),el('div','box',t.client_feedback));
 
   const msg=el('p','msg'); msg.setAttribute('role','status');
   if(t.status==='for_approval'){
@@ -222,7 +238,7 @@ function render(flash){
     b.addEventListener('click',()=>{filter=value;openId=null;render()}); f.append(b);
   });
 
-  const list=tasks.filter(t=>t.category===cat&&(filter==='all'||t.status===filter));
+  const list=tasks.filter(t=>t.category===cat&&matchesFilter(t,filter));
   const l=$('list'); l.replaceChildren();
   if(!list.length) l.append(el('div','empty','No items in this section yet.'));
   list.forEach(t=>l.append(listRow(t)));
