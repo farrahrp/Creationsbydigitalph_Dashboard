@@ -183,11 +183,19 @@ function detail(t){
   field('Format',t.format); field('Platforms',t.platform); field('Date',fmtDate(t.due_date));
   body.append(dl);
   if(t.details) body.append(el('div','label','Captions'),el('div','box',t.details));
-  const link=safeUrl(t.preview_url);
-  if(link){
+  const link=safeUrl(t.preview_url), folder=safeUrl(t.folder_url);
+  const isCarousel=t.format==='Carousel';
+  if(link||folder){
     body.append(el('div','label','Preview'));
-    const a=el('a','preview','Open the full creative ↗'); a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
-    body.append(a);
+    if(folder){
+      const f=el('a','preview',isCarousel?'Open all carousel slides ↗':'Open the creative folder ↗'); f.href=folder; f.target='_blank'; f.rel='noopener noreferrer';
+      body.append(f);
+    }
+    if(link&&!(isCarousel&&folder)){
+      const a=el('a','preview','Open the full creative ↗'); a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
+      if(folder) a.style.marginLeft='10px';
+      body.append(a);
+    }
   }
   const slides=Array.isArray(t.creative_assets)?t.creative_assets.map(x=>typeof x==='string'?{url:x}:x).filter(x=>x&&safeUrl(x.url)):[];
   if(slides.length){
