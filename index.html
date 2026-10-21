@@ -5,190 +5,77 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Client Workspace | Creations by Digital PH</title>
 <style>
-:root{--red:#cf2027;--darkred:#a8181e;--ink:#202020;--muted:#666;--line:#e7e7e7;--soft:#fff3f3;--paper:#fff;--green:#246848}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}button,a,textarea{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #e99599;outline-offset:2px}a{color:var(--darkred)}.wrap{width:min(1160px,calc(100% - 48px));margin:auto}header{border-bottom:1px solid var(--line)}.top{display:flex;min-height:80px;align-items:center;justify-content:space-between;gap:20px}.brand{font:26px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}.brand i{font:italic 17px Georgia,serif;color:var(--red);margin-left:5px}.smallcaps{color:var(--darkred);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}.demo{border:1px solid #edc5c7;color:var(--darkred);padding:7px 12px;font-size:11px}.hero{padding:43px 0 35px;border-bottom:1px solid var(--line)}h1,h2,.stat strong{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;letter-spacing:.012em}h1{font-size:clamp(44px,6vw,78px);line-height:1.02;margin:10px 0 15px}h1 span{color:var(--red)}.hero p{max-width:670px;color:var(--muted);margin:0}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.chip{border:1px solid var(--line);padding:5px 10px;font-size:12px}.main{padding:34px 0 65px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 36px}.stat{border:1px solid var(--line);padding:19px}.stat strong{color:var(--red);font-size:45px;display:block;line-height:1.1}.stat span{color:var(--muted);font-size:12px}.section-title{font-size:32px;margin:0}.section-intro{font-size:13px;color:var(--muted);margin:4px 0 0}.area-tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-top:20px}.area-tabs button,.filters button{border:1px solid var(--line);background:white;padding:11px 16px;color:var(--ink);font-size:13px;font-weight:700}.area-tabs button[aria-selected="true"]{background:var(--red);border-color:var(--red);color:white}.area{padding-top:23px}.area-head{display:flex;justify-content:space-between;gap:20px;align-items:start}.area-head h2{font-size:28px;margin:0}.filters{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.filters button{padding:8px 12px;font-size:12px}.filters button[aria-pressed="true"]{border-color:var(--red);color:var(--darkred);background:var(--soft)}.task-grid{display:grid;gap:12px}.task{display:grid;grid-template-columns:86px 1fr auto;gap:17px;padding:14px;background:#fff;border:1px solid var(--line);align-items:center;text-align:left;width:100%}.task:hover{border-color:var(--red);background:#fffafa}.thumb{width:86px;height:72px;background:#f7eded;display:grid;place-items:center;color:var(--darkred);overflow:hidden;font-size:11px;font-weight:bold;text-align:center;padding:6px}.thumb img{width:100%;height:100%;object-fit:cover}.thumb.is-video{background:#2b1a1b;color:#fff}.task-title{font-weight:700;font-size:16px;margin:0}.task-meta{font-size:12px;color:var(--muted);margin:4px 0 0}.status{display:inline-block;font-size:11px;background:#fff1e2;color:#8b571c;padding:6px 10px;white-space:nowrap}.status.approved,.status.completed{color:#206042;background:#e7f3ea}.status.revision,.status.action{color:#a02f31;background:#fff0f0}.status.active{color:#4f527a;background:#edecfc}.empty{border:1px dashed var(--line);color:var(--muted);padding:25px}.detail{border:1px solid var(--line);margin-top:24px}.detail[hidden]{display:none}.detail-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:start;gap:16px}.detail-head h3{font:32px Impact,'Arial Narrow',sans-serif;margin:5px 0}.close{border:1px solid var(--line);background:white;padding:7px 10px}.detail-body{display:grid;grid-template-columns:220px 1fr;gap:22px;padding:22px}.media{display:flex;flex-direction:column;gap:10px}.media-thumb{width:100%;aspect-ratio:4/5;background:#f8eeee;display:grid;place-items:center;color:var(--darkred);text-align:center;padding:12px}.media-thumb img{width:100%;height:100%;object-fit:cover}.media-thumb.video{aspect-ratio:16/9;background:#251c1e;color:white}.media a{display:inline-block;border:1px solid var(--red);padding:9px 12px;text-decoration:none;text-align:center;font-size:12px;font-weight:700}.media-note{font-size:12px;color:var(--muted)}.fields{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;font-size:13px;margin-bottom:18px}.fields dt{color:var(--muted)}.fields dd{margin:0}.detail h4{font-size:11px;letter-spacing:.12em;color:var(--darkred);text-transform:uppercase;margin:17px 0 8px}.caption{background:#fafafa;border:1px solid var(--line);padding:13px;white-space:pre-wrap;font-size:13px}.note{font-size:13px;color:var(--muted)}textarea{width:100%;min-height:85px;padding:12px;border:1px solid #d3d3d3;resize:vertical}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.primary,.secondary{padding:11px 16px;font-size:12px;font-weight:700;border:1px solid var(--red)}.primary{background:var(--red);color:white}.secondary{color:var(--darkred);background:white}.actions button:disabled{opacity:.48;cursor:default}.message{font-size:12px;color:var(--muted);min-height:18px}.notice{padding:15px;border-left:3px solid var(--red);background:#faf8f8;color:#666;font-size:12px;margin-top:25px}footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}@media(max-width:700px){.wrap{width:min(100% - 30px,1160px)}.brand{font-size:21px}.brand i{font-size:14px}.demo{font-size:9px}.hero{padding:34px 0}.summary{gap:7px}.stat{padding:12px}.stat strong{font-size:33px}.task{grid-template-columns:64px 1fr;gap:10px}.thumb{width:64px;height:64px}.task .status{grid-column:2;justify-self:start}.detail-body{grid-template-columns:1fr}.media{max-width:260px}.area-head{display:block}}
-
-/* Cross-workspace action inbox */
-.action-inbox{border:1px solid var(--line);margin:7px 0 38px;background:#fff}
-.action-inbox-top{padding:20px 22px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line)}
-.action-inbox-top h2{font-size:30px;margin:0}.action-inbox-top p{font-size:13px;color:var(--muted);margin:5px 0 0}
-.action-count{border:1px solid #edc5c7;color:var(--darkred);font-size:12px;font-weight:bold;padding:8px 12px;white-space:nowrap}
-.action-list{display:grid}.action-item{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;width:100%;background:#fff;text-align:left;border:0;border-bottom:1px solid var(--line);padding:15px 22px;cursor:pointer}.action-item:last-child{border-bottom:0}.action-item:hover,.action-item:focus-visible{background:#fff7f7}.action-type{font-size:10px;font-weight:bold;letter-spacing:.09em;color:var(--darkred);text-transform:uppercase}.action-item strong{display:block;font-size:14px}.action-item small{display:block;font-size:12px;color:var(--muted);margin-top:3px}.action-arrow{font-size:19px;color:var(--red)}.action-empty{padding:22px;color:var(--muted);font-size:13px}
-@media(max-width:700px){.action-inbox-top{padding:16px}.action-item{grid-template-columns:1fr auto;padding:13px 16px;gap:8px}.action-type{grid-column:1/-1}.action-arrow{grid-column:2;grid-row:2}.action-count{font-size:10px}}
-
-/* Public landing and demonstration entry */
-[hidden]{display:none!important}.header-actions{display:flex;align-items:center;gap:14px}.login-button{padding:11px 23px;border:1px solid var(--red);background:var(--red);color:#fff;font-weight:700;font-size:13px}.login-button:hover,.primary:hover{background:var(--darkred)}.public-hero{padding:65px 0 35px}.public-hero h1{max-width:900px}.public-hero p{max-width:650px;font-size:16px;color:var(--muted)}.landing-preview{padding:17px 0 75px}.preview-title{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}.preview-title h2{font-size:34px;margin:0}.preview-title p{color:var(--muted);font-size:13px;margin:4px 0 0}.preview-label{color:var(--darkred);font-size:11px;letter-spacing:.08em;font-weight:700}.sample-tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px;margin:20px 0 26px}.sample-tabs span{display:inline-block;border:1px solid var(--line);padding:10px 15px;font-size:13px;font-weight:700}.sample-tabs span:first-child{background:var(--red);border-color:var(--red);color:#fff}.sample-list{display:grid;gap:12px}.sample-row{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:15px;border:1px solid var(--line)}.sample-thumb{width:76px;height:62px;background:#f8ebeb;color:var(--darkred);display:grid;place-items:center;font-size:10px;font-weight:700;text-align:center}.sample-row strong{display:block}.sample-row small{color:var(--muted);display:block;margin-top:4px}.sample-footer{margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}.sample-footer p{font-size:12px;color:var(--muted)}dialog.login-modal{width:min(480px,calc(100% - 32px));padding:0;border:1px solid var(--line);box-shadow:0 24px 90px #0003;background:#fff;color:var(--ink)}dialog::backdrop{background:#16161696}.login-head{display:flex;justify-content:space-between;align-items:center;padding:25px 28px 0}.login-modal h2{font-size:37px;margin:8px 28px}.login-modal .login-copy{color:var(--muted);font-size:13px;margin:0 28px 18px}.login-form{padding:0 28px 25px}.login-form label{display:block;margin:12px 0 5px;font-size:12px;font-weight:700}.login-form input{width:100%;border:1px solid var(--line);padding:12px;font:inherit;background:#f9f9f9}.login-form input:disabled{opacity:.7}.login-form .primary{width:100%;margin-top:18px}.login-note{margin:15px 0 0;font-size:12px;color:var(--muted);line-height:1.6}.modal-close{border:1px solid var(--line);background:#fff;padding:7px 11px}.demo-entry{padding:17px 28px 28px;border-top:1px solid var(--line)}.demo-entry p{font-size:12px;color:var(--muted);margin:0 0 12px}.demo-entry button{width:100%}.dashboard-top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid var(--line)}.dashboard-top span{color:var(--muted);font-size:12px}@media(max-width:650px){.public-hero{padding:35px 0 25px}.sample-row{grid-template-columns:60px 1fr;gap:10px}.sample-thumb{width:60px;height:60px}.sample-row .status{grid-column:2;justify-self:start}.brand{font-size:19px}.brand i{font-size:12px}.login-button{padding:9px 12px}.preview-title h2{font-size:28px}}
-.secure-workspace{padding:40px 0 90px}.secure-top{display:flex;gap:18px;justify-content:space-between;align-items:start;border-bottom:1px solid var(--line);padding-bottom:24px}.secure-top h2{font:36px Impact,Arial,sans-serif;margin:6px 0}.secure-top p{color:var(--muted);font-size:13px}.secure-content{padding:25px 0}.secure-content h3{font-size:18px}.workspace-card{border:1px solid var(--line);padding:15px;margin-bottom:8px}.workspace-card strong{display:block}.workspace-card span{font-size:12px;color:var(--muted)}.secure-empty{border:1px dashed var(--line);padding:20px;color:var(--muted)}
+:root{--red:#cf2027;--dark:#a8181e;--ink:#202020;--muted:#666;--line:#e7e7e7}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}
+a{color:var(--dark)}
+.wrap{width:min(1160px,calc(100% - 48px));margin:auto}
+header{border-bottom:1px solid var(--line)}
+.top{display:flex;min-height:80px;align-items:center;justify-content:space-between;gap:20px}
+.brand{font:26px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}
+.brand i{font:italic 17px Georgia,serif;color:var(--red);margin-left:5px}
+.actions{display:flex;align-items:center;gap:14px}
+.chip{border:1px solid #edc5c7;color:var(--dark);padding:7px 12px;font-size:11px}
+.btn{display:inline-block;padding:11px 23px;border:1px solid var(--red);background:var(--red);color:#fff;font-weight:700;font-size:13px;text-decoration:none}
+.btn:hover{background:var(--dark)}
+.small{color:var(--dark);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.hero{padding:65px 0 35px}
+h1,h2{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;letter-spacing:.012em}
+h1{font-size:clamp(44px,6vw,78px);line-height:1.02;margin:10px 0 15px}
+h1 span{color:var(--red)}
+.hero p{max-width:650px;font-size:16px;color:var(--muted);margin:0}
+.preview{padding:17px 0 75px}
+.ptitle{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}
+.ptitle h2{font-size:34px;margin:0}.ptitle p{color:var(--muted);font-size:13px;margin:4px 0 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px;margin:20px 0 26px}
+.tabs span{border:1px solid var(--line);padding:10px 15px;font-size:13px;font-weight:700}
+.tabs span:first-child{background:var(--red);border-color:var(--red);color:#fff}
+.list{display:grid;gap:12px}
+.row{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:15px;border:1px solid var(--line)}
+.thumb{width:76px;height:62px;background:#f8ebeb;color:var(--dark);display:grid;place-items:center;font-size:10px;font-weight:700;text-align:center}
+.row strong{display:block}.row small{color:var(--muted);display:block;margin-top:4px}
+.status{display:inline-block;font-size:11px;background:#fff1e2;color:#8b571c;padding:6px 10px;white-space:nowrap}
+.status.ok{color:#206042;background:#e7f3ea}
+.foot{margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}
+.foot p{font-size:12px;color:var(--muted);margin:0}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:650px){.brand{font-size:19px}.brand i{font-size:12px}.hero{padding:35px 0 25px}.row{grid-template-columns:60px 1fr;gap:10px}.thumb{width:60px;height:60px}.row .status{grid-column:2;justify-self:start}.ptitle h2{font-size:28px}}
 </style>
 </head>
-<body><script>(function(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));if(q.has("code")||h.has("access_token")||h.has("error")||q.get("type")==="invite"||q.get("type")==="recovery"){location.replace("setup-password.html"+location.search+location.hash);}})();</script>
-<header><div class="wrap top"><div class="brand">CREATIONS <i>by Digital Ph</i></div><div class="header-actions"><span class="demo">PORTAL PREVIEW</span><button type="button" class="login-button" id="open-login">Log in</button></div></div></header>
-<section id="public-home" aria-label="Public client portal preview">
-  <div class="wrap public-hero"><div class="smallcaps">Creations by Digital PH / Client Collaboration</div><h1>Your content. <span>Your decisions.</span></h1><p>One organized place to review upcoming posts, share feedback, and stay aligned on the work that matters.</p></div>
-  <div class="wrap landing-preview">
-    <div class="preview-title"><div><div class="preview-label">PREVIEW YOUR CLIENT EXPERIENCE</div><h2>Your workspace</h2><p>Here's a glimpse of the tasks your team could manage in the portal.</p></div><span class="demo">SAMPLE DATA</span></div>
-    <div class="sample-tabs" aria-label="Sample workspace categories"><span>Content Approvals</span><span>Business Support</span><span>Campaigns</span></div>
-    <div class="sample-list">
-      <div class="sample-row"><div class="sample-thumb">CREATIVE</div><div><strong>Product Feature Spotlight</strong><small>Facebook & Instagram · Example scheduled post</small></div><span class="status">For approval</span></div>
-      <div class="sample-row"><div class="sample-thumb">CAROUSEL</div><div><strong>Educational Carousel</strong><small>Facebook & Instagram · Example review item</small></div><span class="status">For approval</span></div>
-      <div class="sample-row"><div class="sample-thumb">▶ REEL</div><div><strong>Quick Tips Reel</strong><small>Instagram · Example video review</small></div><span class="status approved">Approved</span></div>
-    </div>
-    <div class="sample-footer"><p>Illustrative items only. Actual client content is never displayed publicly.</p><button class="primary" type="button" id="preview-login">Log in to your workspace →</button></div>
-  </div>
-</section>
-<dialog id="login-modal" class="login-modal" aria-labelledby="login-title"><div class="login-head"><div class="smallcaps">CLIENT ACCESS</div><button type="button" class="modal-close" id="close-login" aria-label="Close login">✕</button></div><h2 id="login-title">Client login</h2><p class="login-copy">Sign in to review your team's content and requests.</p><div class="login-form"><label for="login-email">Email address</label><input id="login-email" type="email" autocomplete="username" placeholder="Email" required><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" placeholder="Password" required><button type="button" class="primary" id="submit-login">Log in securely</button><p class="login-note" id="login-feedback" role="status">Access is invitation-only. Contact your portal administrator if you need an account.</p><button type="button" class="secondary" id="forgot-password" style="margin-top:12px;width:100%">Set or reset password by email</button></div><div class="demo-entry"><p>Want to see how the client dashboard works? Explore with fictional sample tasks.</p><button type="button" class="secondary" id="enter-demo">Explore sample workspace →</button></div></dialog>
-<dialog id="password-modal" class="login-modal" aria-labelledby="password-title"><div class="login-head"><div class="smallcaps">SECURE ACCOUNT</div><button type="button" class="modal-close" id="close-password" aria-label="Close password setup">✕</button></div><h2 id="password-title">Set your password</h2><p class="login-copy">Create a password for your invited account.</p><form id="password-form" class="login-form"><label for="new-password">New password</label><input id="new-password" type="password" autocomplete="new-password" minlength="12" required><label for="confirm-password">Confirm password</label><input id="confirm-password" type="password" autocomplete="new-password" minlength="12" required><button type="submit" class="primary">Save password</button><p class="login-note" id="password-feedback" role="status">Use at least 12 characters and a unique password.</p></form></dialog>
-<section id="secure-workspace" hidden class="wrap secure-workspace" aria-label="Authenticated client account"><div class="secure-top"><div><div class="smallcaps">SECURE ACCOUNT</div><h2>Welcome to your workspace</h2><p id="secure-identity"></p></div><div class="actions"><button type="button" class="secondary" id="account-set-password">Set / change password</button><button type="button" class="secondary" id="sign-out">Sign out</button></div></div><div class="secure-content"><h3>Your assigned client workspaces</h3><div id="secure-memberships" role="status">Loading your access...</div><p class="login-note">Authentication is active. Real content approvals and Notion synchronization are not connected yet. The sample dashboard remains a separate public demonstration.</p></div></section><div id="dashboard" hidden>
-<div class="wrap dashboard-top"><span>Sample Client · Demonstration workspace</span><button type="button" class="secondary" id="exit-demo">← Back to homepage</button></div>
-<section class="hero"><div class="wrap"><div class="smallcaps">Client workspace / Sample client</div><h1>Your work, <span>all in one place.</span></h1><p>Review content, respond to business requests, and follow campaign updates without searching through separate conversations.</p><div class="chips"><span class="chip">Sample client</span><span class="chip">Content · Support · Campaigns</span></div></div></section>
-<main class="wrap main">
-<h2 class="section-title">At a glance</h2><p class="section-intro">A quick view of items in your sample workspace.</p>
-<section class="summary" aria-label="Workspace summary"><div class="stat"><strong id="count-approval">0</strong><span>Content awaiting approval</span></div><div class="stat"><strong id="count-support">0</strong><span>Business support items</span></div><div class="stat"><strong id="count-campaigns">0</strong><span>Active campaigns</span></div></section>
-<section class="action-inbox" aria-label="Client action required">
-<div class="action-inbox-top"><div><div class="smallcaps">Your priority inbox</div><h2>Client Action Required</h2><p>Items waiting for your review or decision. Select one to open its full details below.</p></div><span class="action-count" id="action-count">0 items</span></div>
-<div class="action-list" id="action-list"></div>
-</section>
-<h2 class="section-title">Your workspace</h2><p class="section-intro">Choose a category, then select an item to see its details.</p>
-<nav class="area-tabs" role="tablist" aria-label="Workspace areas">
-<button type="button" role="tab" data-area="content" aria-selected="true" aria-controls="workspace-panel">Content Approvals</button>
-<button type="button" role="tab" data-area="support" aria-selected="false" aria-controls="workspace-panel">Business Support</button>
-<button type="button" role="tab" data-area="campaigns" aria-selected="false" aria-controls="workspace-panel">Campaigns</button>
-</nav>
-<section class="area" id="workspace-panel" role="tabpanel">
-<div class="area-head"><div><h2 id="area-title">Content Approvals</h2><p class="section-intro" id="area-desc"></p></div></div>
-<div class="filters" id="filters" aria-label="Filter task status"></div>
-<div class="task-grid" id="task-list" aria-live="polite"></div>
-<section class="detail" id="detail" hidden aria-label="Selected item details">
-<div class="detail-head"><div><div class="smallcaps" id="detail-category"></div><h3 id="detail-title"></h3><span id="detail-status" class="status"></span></div><button type="button" class="close" id="close-detail">✕ Close</button></div>
-<div class="detail-body"><div class="media" id="detail-media"></div><div><dl class="fields" id="detail-fields"></dl><div id="detail-content"></div><div id="approval-actions" hidden><h4>Your feedback</h4><textarea id="feedback" placeholder="Describe the edits you would like to request..."></textarea><div class="actions"><button type="button" class="primary" id="approve">Approve content</button><button type="button" class="secondary" id="request-revision">Request revision</button></div></div><p class="message" role="status" id="message"></p></div></div>
-</section>
-<div class="notice"><strong>Public demo:</strong> This page uses fictional tasks. No authentication or Notion synchronization is connected. Demo approval changes reset on reload. Do not add private client details or credentials to this public GitHub repository.</div>
-</section>
-</main>
-</div>
-<footer><div class="wrap">Creations by Digital PH · Client Workspace · Demonstration</div></footer>
+<body>
 <script>
-
-// This is demo navigation, NOT authentication or access control.
-const loginModal=document.getElementById('login-modal');
-function showLogin(){loginModal.showModal();}
-function showPublic(){document.getElementById('dashboard').hidden=true;document.getElementById('public-home').hidden=false;document.getElementById('open-login').hidden=false;window.scrollTo(0,0)}
-document.getElementById('open-login').addEventListener('click',showLogin);
-document.getElementById('preview-login').addEventListener('click',showLogin);
-document.getElementById('close-login').addEventListener('click',()=>loginModal.close());
-document.getElementById('enter-demo').addEventListener('click',()=>{loginModal.close();document.getElementById('public-home').hidden=true;document.getElementById('dashboard').hidden=false;document.getElementById('open-login').hidden=true;window.scrollTo(0,0)});
-document.getElementById('exit-demo').addEventListener('click',showPublic);
-
-// Public fictional demo. Replace the empty asset links with authorized PUBLIC URLs only.
-// For real private creative files, wait until secure login and authorized access are implemented.
-const items=[
-{id:1,area:'content',title:'Product Feature Spotlight',status:'pending',kind:'Static image',platforms:'Facebook & Instagram',date:'October 30, 2026',thumbUrl:'',assetUrl:'',fb:'Explore the details behind our newest product feature. Here is what makes it useful for everyday needs.',ig:'Built for what comes next.\n#ProductFeature #Demo'},
-{id:2,area:'content',title:'Educational Carousel',status:'pending',kind:'Carousel',platforms:'Facebook & Instagram',date:'November 2, 2026',thumbUrl:'',assetUrl:'',fb:'Three useful points to know before choosing your next product.',ig:'Swipe for three quick tips.\n#Tips #Demo'},
-{id:3,area:'content',title:'Quick Tips Reel',status:'pending',kind:'Reel',platforms:'Instagram',date:'November 4, 2026',thumbUrl:'',assetUrl:'',fb:'A short video with helpful everyday advice.',ig:'Watch and save these quick tips.\n#Reels #Demo'},
-{id:4,area:'content',title:'Community Thank You',status:'approved',kind:'Static image',platforms:'Facebook',date:'October 24, 2026',thumbUrl:'',assetUrl:'',fb:'Thank you for being part of our community.',ig:'Thank you for being here.\n#Community #Demo'},
-{id:5,area:'content',title:'Weekend Post',status:'revision',kind:'Carousel',platforms:'Facebook & Instagram',date:'October 27, 2026',thumbUrl:'',assetUrl:'',fb:'Here is an idea for the weekend.',ig:'Weekend inspiration.\n#Weekend #Demo',feedback:'Please shorten the headline.'},
-{id:6,area:'support',title:'Meta Page Access Review',status:'action',topic:'Meta account',due:'October 29, 2026',description:'Confirm who should have access to the page and review the proposed permission changes.',next:'Client to review access list and reply with approval.'},
-{id:7,area:'support',title:'Monthly Billing Confirmation',status:'pending',topic:'Billing',due:'November 1, 2026',description:'Review the monthly invoice summary and flag any details that need correction.',next:'Client to confirm billing details.'},
-{id:8,area:'support',title:'Customer Email Template',status:'completed',topic:'Email support',due:'October 22, 2026',description:'A reusable response template has been prepared and confirmed.',next:'No action required.'},
-{id:9,area:'campaigns',title:'November Awareness Campaign',status:'active',topic:'Campaign planning',due:'November 3, 2026',description:'Draft campaign concept and a proposed sequence of educational content.',next:'Review campaign objectives and timeline.',thumbUrl:'',assetUrl:''},
-{id:10,area:'campaigns',title:'Seasonal Promotion Concept',status:'pending',topic:'Campaign proposal',due:'November 6, 2026',description:'A sample promotion brief is awaiting feedback on scope and key message.',next:'Confirm direction before creative production.',thumbUrl:'',assetUrl:''}
-];
-const $=id=>document.getElementById(id);
-const statusNames={pending:'For approval',approved:'Approved',revision:'Revision requested',action:'Needs attention',completed:'Completed',active:'In progress'};
-const areas={content:{title:'Content Approvals',desc:'Review graphics, carousel posts and reels before they go live.',filters:[['all','All content'],['pending','For Approval'],['approved','Approved Tasks'],['revision','Revision Requests']]},support:{title:'Business Support',desc:'Email requests, Meta account concerns, billing questions and other coordination.',filters:[['all','All requests'],['action','Needs Attention'],['pending','Pending'],['completed','Completed']]},campaigns:{title:'Campaigns',desc:'Track campaign concepts, proposals, timelines and decisions.',filters:[['all','All campaigns'],['active','In Progress'],['pending','Awaiting Feedback']]}};
-let currentArea='content',currentFilter='all',selected=null;
-const safePublicUrl=value=>{try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:null}catch{return null}};
-function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
-function actionItems(){return items.filter(i=>(i.area==='content'&&i.status==='pending')||(i.area==='support'&&i.status==='action')||(i.area==='campaigns'&&i.status==='pending'))}
-function renderActionInbox(){
- const outstanding=actionItems();
- $('action-count').textContent=`${outstanding.length} item${outstanding.length===1?'':'s'}`;
- const list=$('action-list');list.replaceChildren();
- if(!outstanding.length){list.append(el('div','action-empty','You are all caught up. No decisions are waiting.'));return}
- for(const item of outstanding){
-  const b=el('button','action-item');b.type='button';
-  b.append(el('span','action-type',item.area==='content'?'Content approval':item.area==='support'?'Business support':'Campaign decision'));
-  const body=el('div');body.append(el('strong',null,item.title),el('small',null,item.area==='content'?`${item.platforms} · ${item.date}`:`${item.topic} · ${item.due}`));
-  b.append(body,el('span','action-arrow','→'));
-  b.addEventListener('click',()=>{currentArea=item.area;currentFilter='all';selected=null;render();showDetail(item.id)});
-  list.append(b);
- }
-}
-function totals(){for(const [id,count] of [['count-approval',items.filter(i=>i.area==='content'&&i.status==='pending').length],['count-support',items.filter(i=>i.area==='support'&&i.status!=='completed').length],['count-campaigns',items.filter(i=>i.area==='campaigns'&&i.status==='active').length]])$(id).textContent=String(count).padStart(2,'0')}
-function makeThumb(item){const box=el('div','thumb'+(item.kind==='Reel'?' is-video':''));const url=safePublicUrl(item.thumbUrl);if(url){const img=el('img');img.src=url;img.alt='Sample media thumbnail';img.loading='lazy';box.append(img)}else box.textContent=item.kind==='Reel'?'▶ REEL':item.area==='content'?'CREATIVE':item.area==='campaigns'?'CAMPAIGN':'REQUEST';return box}
-function render(){totals();renderActionInbox();document.querySelectorAll('[data-area]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.area===currentArea)));const a=areas[currentArea];$('area-title').textContent=a.title;$('area-desc').textContent=a.desc;$('filters').replaceChildren();a.filters.forEach(([value,label])=>{const b=el('button',null,label);b.type='button';b.setAttribute('aria-pressed',String(value===currentFilter));b.addEventListener('click',()=>{currentFilter=value;selected=null;$('detail').hidden=true;render()});$('filters').append(b)});const list=items.filter(i=>i.area===currentArea&&(currentFilter==='all'||i.status===currentFilter));$('task-list').replaceChildren();if(!list.length)$('task-list').append(el('div','empty','No items in this section yet.'));for(const item of list){const b=el('button','task');b.type='button';b.append(makeThumb(item));const mid=el('div');mid.append(el('h3','task-title',item.title),el('p','task-meta',item.area==='content'?`${item.platforms} · ${item.date}`:`${item.topic} · ${item.due}`));b.append(mid,el('span','status '+item.status,statusNames[item.status]));b.addEventListener('click',()=>showDetail(item.id));$('task-list').append(b)}}
-function addField(dl,label,value){dl.append(el('dt',null,label),el('dd',null,value))}
-function showDetail(id){const item=items.find(i=>i.id===id);if(!item)return;selected=item.id;$('detail-category').textContent=areas[item.area].title;$('detail-title').textContent=item.title;$('detail-status').textContent=statusNames[item.status];$('detail-status').className='status '+item.status;const fields=$('detail-fields');fields.replaceChildren();if(item.area==='content'){addField(fields,'Format',item.kind);addField(fields,'Platforms',item.platforms);addField(fields,'Publish date',item.date)}else{addField(fields,'Category',item.topic);addField(fields,'Target date',item.due)}const media=$('detail-media');media.replaceChildren();if(item.area!=='support'){const thumbnail=el('div','media-thumb'+(item.kind==='Reel'?' video':''));const thumb=safePublicUrl(item.thumbUrl);if(thumb){const img=el('img');img.src=thumb;img.alt='Creative thumbnail';thumbnail.append(img)}else thumbnail.textContent=item.kind==='Reel'?'▶ REEL PREVIEW':'CREATIVE THUMBNAIL';media.append(thumbnail);const asset=safePublicUrl(item.assetUrl);if(asset){const a=el('a',null,item.kind==='Reel'?'Open full reel ↗':'Open full creative ↗');a.href=asset;a.target='_blank';a.rel='noopener noreferrer';media.append(a)}else media.append(el('div','media-note','Full-size link has not been added yet.'));}else media.append(el('div','media-note','Business support request · No creative attachment'));const c=$('detail-content');c.replaceChildren();if(item.area==='content'){c.append(el('h4',null,'Facebook caption'),el('div','caption',item.fb),el('h4',null,'Instagram caption'),el('div','caption',item.ig))}else{c.append(el('h4',null,'Overview'),el('p','note',item.description),el('h4',null,'Next step'),el('p','note',item.next))}$('approval-actions').hidden=item.area!=='content';$('feedback').value=item.feedback||'';$('approve').disabled=item.status==='approved';$('request-revision').disabled=item.status==='revision';$('message').textContent='Demo only — no information is submitted or saved.';$('detail').hidden=false;$('detail').scrollIntoView({behavior:'smooth',block:'start'})}
-function changeStatus(next){const item=items.find(i=>i.id===selected);if(!item||item.area!=='content')return;const feedback=$('feedback').value.trim();if(next==='revision'&&!feedback){$('message').textContent='Please enter feedback before requesting a revision.';return;}item.status=next;item.feedback=feedback;currentFilter='all';render();showDetail(item.id);$('message').textContent=next==='approved'?'Demo approval completed on this page only.':'Demo revision request recorded on this page only.'}
-document.querySelectorAll('[data-area]').forEach(b=>b.addEventListener('click',()=>{currentArea=b.dataset.area;currentFilter='all';selected=null;$('detail').hidden=true;render()}));$('close-detail').addEventListener('click',()=>{$('detail').hidden=true;selected=null});$('approve').addEventListener('click',()=>changeStatus('approved'));$('request-revision').addEventListener('click',()=>changeStatus('revision'));render();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-// Authentication only: the private Notion calendar has NOT been synchronized.
+// invite and password-reset links arrive here; pass them on to the password page
 (function(){
- const projectUrl="https://enapawxhzizzefnfebco.supabase.co";
- const publishableKey="sb_publishable_9xZHzw1SFJVqTAcQuxic8w_sWhNqS1N";
- const feedback=document.getElementById("login-feedback");
- const loginButton=document.getElementById("submit-login");
- const loginEmail=document.getElementById("login-email");
- const loginPassword=document.getElementById("login-password");
- const secureView=document.getElementById("secure-workspace");
- let client;
- const landingAuthFlow=/#(?:.*&)?type=(invite|recovery)(?:&|$)/.test(window.location.hash)||/[?&]type=(invite|recovery)(?:&|$)/.test(window.location.search);
- const passwordDialog=document.getElementById("password-modal");
- function passwordPrompt(){document.getElementById("login-modal").close();if(!passwordDialog.open)passwordDialog.showModal();}
- function message(txt){feedback.textContent=txt;}
- function signedOutView(){secureView.hidden=true;document.getElementById("dashboard").hidden=true;document.getElementById("public-home").hidden=false;document.getElementById("open-login").hidden=false;document.getElementById("open-login").textContent="Log in";}
- async function signedInView(user){
-  document.getElementById("login-modal").close();
-  document.getElementById("public-home").hidden=true;
-  document.getElementById("dashboard").hidden=true;
-  secureView.hidden=false;
-  document.getElementById("open-login").hidden=true;
-  document.getElementById("secure-identity").textContent=user.email||"Signed-in account";
-  const list=document.getElementById("secure-memberships");
-  list.textContent="Checking assigned workspaces...";
-  const {data,error}=await client.from("client_memberships").select("client_id,role,clients(name,slug)").eq("user_id",user.id);
-  if(error){list.textContent="Signed in. Workspace access is not ready yet. Please contact the portal administrator.";return;}
-  list.replaceChildren();
-  if(!data||!data.length){const d=document.createElement("div");d.className="secure-empty";d.textContent="No client workspace has been assigned to this account yet.";list.append(d);return;}
-  for(const membership of data){const d=document.createElement("div");d.className="workspace-card";const name=document.createElement("strong");name.textContent=membership.clients?.name||"Assigned workspace";const role=document.createElement("span");role.textContent="Role: "+membership.role;d.append(name,role);list.append(d);}
- }
- if(!window.supabase?.createClient){message("Login service could not load. Check your internet connection and refresh.");loginButton.disabled=true;return;}
- client=window.supabase.createClient(projectUrl,publishableKey);
- document.getElementById("close-password").addEventListener("click",()=>passwordDialog.close());
- document.getElementById("account-set-password").addEventListener("click",passwordPrompt);
- document.getElementById("password-form").addEventListener("submit",async e=>{
-  e.preventDefault();const p=document.getElementById("new-password").value;const confirm=document.getElementById("confirm-password").value;const status=document.getElementById("password-feedback");
-  if(p.length<12){status.textContent="Use at least 12 characters.";return;}
-  if(p!==confirm){status.textContent="The passwords do not match.";return;}
-  const submit=e.target.querySelector("button[type=submit]");submit.disabled=true;status.textContent="Saving password...";
-  try{const {error}=await client.auth.updateUser({password:p});if(error)throw error;document.getElementById("new-password").value="";document.getElementById("confirm-password").value="";status.textContent="Password saved. Your account is ready.";setTimeout(()=>passwordDialog.close(),1200);}
-  catch(err){status.textContent="Could not save the password. Request a fresh password email and try again.";}
-  finally{submit.disabled=false;}
- });
- document.getElementById("forgot-password").addEventListener("click",async()=>{
-  const email=loginEmail.value.trim();if(!email){message("Enter your invited email address above first.");return;}
-  const btn=document.getElementById("forgot-password");btn.disabled=true;message("Requesting password email...");
-  try{const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:"https://farrahrp.github.io/Creationsbydigitalph_Dashboard/"});if(error)throw error;message("If this address has an account, you will receive a password email. Check your inbox and spam folder.");}
-  catch(err){message("Could not send a password email right now. Try again later or contact the administrator.");}
-  finally{btn.disabled=false;}
- });
- client.auth.onAuthStateChange((event,session)=>{
-  if(event==="PASSWORD_RECOVERY"||(landingAuthFlow&&event==="SIGNED_IN"&&session?.user)){setTimeout(()=>{if(session?.user){signedInView(session.user).then(passwordPrompt);}},0);}
- });
- loginButton.addEventListener("click",async()=>{
-  const email=loginEmail.value.trim(),password=loginPassword.value;
-  if(!email||!password){message("Enter your email and password.");return;}
-  loginButton.disabled=true;message("Signing in...");
-  try{const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;loginPassword.value="";await signedInView(data.user);}
-  catch(e){message("Unable to sign in. Check your credentials or ask the administrator for access.");}
-  finally{loginButton.disabled=false;}
- });
- loginPassword.addEventListener("keydown",e=>{if(e.key==="Enter")loginButton.click();});
- document.getElementById("sign-out").addEventListener("click",async()=>{await client.auth.signOut();signedOutView();window.scrollTo(0,0);});
- client.auth.getUser().then(({data,error})=>{if(!error&&data?.user){signedInView(data.user).then(()=>{if(landingAuthFlow)passwordPrompt()});}});
+  var q=new URLSearchParams(location.search), h=new URLSearchParams(location.hash.slice(1));
+  if(q.has('code')||h.has('access_token')||h.has('error')||q.get('type')==='invite'||q.get('type')==='recovery'){
+    location.replace('setup-password.html'+location.search+location.hash);
+  }
 })();
 </script>
-<script>document.getElementById("open-login").addEventListener("click",()=>location.href="login.html");document.getElementById("preview-login").addEventListener("click",()=>location.href="login.html");</script></body>
+<header>
+  <div class="wrap top">
+    <div class="brand">CREATIONS <i>by Digital Ph</i></div>
+    <div class="actions"><span class="chip">PORTAL PREVIEW</span><a class="btn" href="login.html">Log in</a></div>
+  </div>
+</header>
+<section class="wrap hero">
+  <div class="small">Creations by Digital PH / Client Collaboration</div>
+  <h1>Your content. <span>Your decisions.</span></h1>
+  <p>One organized place to review upcoming posts, share feedback, and stay aligned on the work that matters.</p>
+</section>
+<section class="wrap preview">
+  <div class="ptitle">
+    <div><div class="small">PREVIEW YOUR CLIENT EXPERIENCE</div><h2>Your workspace</h2><p>Here's a glimpse of the tasks your team could manage in the portal.</p></div>
+    <span class="chip">SAMPLE DATA</span>
+  </div>
+  <div class="tabs" aria-label="Sample workspace categories"><span>Content Approvals</span><span>Business Support</span><span>Campaigns</span></div>
+  <div class="list">
+    <div class="row"><div class="thumb">CREATIVE</div><div><strong>Product Feature Spotlight</strong><small>Facebook &amp; Instagram · Example scheduled post</small></div><span class="status">For approval</span></div>
+    <div class="row"><div class="thumb">CAROUSEL</div><div><strong>Educational Carousel</strong><small>Facebook &amp; Instagram · Example review item</small></div><span class="status">For approval</span></div>
+    <div class="row"><div class="thumb">▶ REEL</div><div><strong>Quick Tips Reel</strong><small>Instagram · Example video review</small></div><span class="status ok">Approved</span></div>
+  </div>
+  <div class="foot"><p>Illustrative items only. Actual client content is never displayed publicly.</p><a class="btn" href="login.html">Log in to your workspace →</a></div>
+</section>
+<footer><div class="wrap">Creations by Digital PH · Client Workspace</div></footer>
+</body>
 </html>

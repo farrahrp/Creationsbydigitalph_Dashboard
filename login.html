@@ -2,176 +2,114 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login | Creations by Digital PH</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Client Login | Creations by Digital PH</title>
 <style>
-:root{--red:#cf2027;--ink:#202020;--muted:#666;--line:#ddd}
+:root{--red:#bf3431;--dark:#9b1f1d;--ink:#222;--muted:#666}
 *{box-sizing:border-box}
-body{font:16px/1.55 Arial,Helvetica,sans-serif;background:#fff;color:var(--ink);margin:0}
-header{padding:24px;border-bottom:1px solid var(--line);font-weight:bold}
-main{max-width:520px;padding:40px 24px;margin:24px auto}
-h1{font:44px Impact,"Arial Narrow",Arial,sans-serif;line-height:1.1}
-h1 em{color:var(--red);font-style:normal}
-h2{font-size:23px;margin:5px 0}
-p{line-height:1.6}
-label{display:block;margin:15px 0 6px}
-input{display:block;padding:12px;width:100%;border:1px solid #bbb;border-radius:2px;font:inherit}
-button{background:var(--red);color:white;border:0;padding:13px 19px;margin-top:18px;cursor:pointer;font:inherit}
-button:disabled{opacity:.6;cursor:wait}
-button.text-button{background:transparent;color:#a8181e;padding:0;margin:18px 0 0;text-decoration:underline}
-button.secondary{background:#fff;color:#a8181e;border:1px solid #a8181e}
-a{color:#a8181e}
-.msg{font-size:14px;color:#444;min-height:22px}
-.help{font-size:13px;color:var(--muted)}
-.panel{border-top:1px solid var(--line);margin-top:22px;padding-top:20px}
 [hidden]{display:none!important}
+body{font:16px/1.6 Arial,Helvetica,sans-serif;margin:0;color:var(--ink);background:#fff}
+header{padding:14px 12px 24px;border-bottom:1px solid #e6e6e6;font-weight:700;font-size:20px}
+main{max-width:640px;margin:0 auto;padding:70px 24px 80px}
+h1{font:56px/1.05 Impact,'Arial Narrow',sans-serif;font-weight:400;margin:0 0 30px}
+h1 em{color:var(--red);font-style:normal}
+h2{font:700 28px/1.2 Arial,Helvetica,sans-serif;margin:30px 0 14px}
+hr{border:0;border-top:1px solid #e6e6e6;margin:0}
+.lead{font-size:18px;margin:0 0 20px}
+.small{font-size:14px;color:var(--muted);margin:0 0 24px}
+label{display:block;margin:0 0 8px;font-size:17px}
+input{display:block;width:100%;border:1px solid #ccc;padding:0 16px;height:46px;font:inherit;font-size:17px;margin:0 0 22px;background:#fff}
+button{font:inherit;font-size:17px;cursor:pointer;background:var(--red);color:#fff;border:1px solid var(--red);padding:0 28px;height:46px}
+button:hover{background:var(--dark)}
+button.outline{background:#fff;color:var(--dark);border-color:var(--dark)}
+button.outline:hover{background:#fff7f7}
+button:disabled{opacity:.6;cursor:default}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #e99599;outline-offset:2px}
+.msg{margin:16px 0 24px;color:#333;min-height:24px}
+a{color:var(--dark)}
+@media(max-width:640px){main{padding-top:40px}h1{font-size:44px}}
 </style>
 </head>
 <body>
 <header>CREATIONS by Digital PH</header>
 <main>
-<h1>Client <em>login.</em></h1>
-<section id="login-view" aria-label="Sign in">
-<p>Sign in to your assigned client workspace.</p>
-<p class="help">First time here? Open your invitation email to set your password. If it expired before you finished, ask the administrator to resend the invitation.</p>
-<form id="login-form">
-<label for="email">Email</label>
-<input id="email" name="email" type="email" required autocomplete="username" inputmode="email">
-<label for="password">Password</label>
-<input id="password" name="password" type="password" required autocomplete="current-password">
-<button id="submit" type="submit">Log in</button>
-</form>
-<p class="msg" id="msg" role="status" aria-live="polite"></p>
-<p id="session-actions" hidden><a href="setup-password.html">Set your password using your active invitation session</a> · <a href="dashboard.html">Open dashboard</a></p>
-<button id="show-reset" class="text-button" type="button" aria-expanded="false" aria-controls="reset-view">Forgot your password? Email me a reset link</button>
-</section>
-<section id="reset-view" class="panel" aria-label="Request a password email" hidden>
-<h2>Reset your password by email</h2>
-<p class="help">Enter the email address for your portal account. If the account exists, we’ll send a link to choose a new password. For an expired invitation, contact the administrator.</p>
-<form id="reset-form">
-<label for="reset-email">Account email</label>
-<input id="reset-email" name="reset-email" type="email" required autocomplete="email" inputmode="email">
-<button id="send-reset" type="submit">Send password reset email</button>
-</form>
-<p class="msg" id="reset-msg" role="status" aria-live="polite"></p>
-<button id="back-to-login" class="secondary" type="button">Back to sign in</button>
-</section>
-<p><a href="index.html">Return to homepage</a></p>
+  <h1>Client <em>login.</em></h1>
+
+  <section id="signin-view">
+    <p class="lead">Sign in to your assigned client workspace.</p>
+    <p class="small">First time here? Open your invitation email to set your password. If you already opened the invitation, use “Set or reset password by email” below.</p>
+    <form id="signin-form">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button id="login" type="submit">Log in</button>
+    </form>
+    <p class="msg" id="msg" role="status"></p>
+    <button id="to-reset" type="button">Set or reset password by email</button>
+    <p style="margin-top:26px"><a href="index.html">Return to homepage</a></p>
+  </section>
+
+  <section id="reset-view" hidden>
+    <hr>
+    <h2>Reset your password by email</h2>
+    <p class="small">Enter the email address for your portal account. If the account exists, we’ll send a link to choose a new password. For an expired invitation, contact the administrator.</p>
+    <form id="reset-form">
+      <label for="reset-email">Account email</label>
+      <input id="reset-email" type="email" autocomplete="username" required>
+      <button id="send-reset" type="submit">Send password reset email</button>
+    </form>
+    <p class="msg" id="reset-msg" role="status"></p>
+    <button id="to-signin" type="button" class="outline">Back to sign in</button>
+    <p style="margin-top:26px"><a href="index.html">Return to homepage</a></p>
+  </section>
 </main>
+<script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-(function(){
-  const query=new URLSearchParams(window.location.search);
-  const hash=new URLSearchParams(window.location.hash.slice(1));
-  const authType=query.get("type")||hash.get("type")||"";
-  const isInviteOrRecovery=["invite","recovery"].includes(authType);
-  const hasInviteOrRecoveryHash=query.has("token_hash")&&isInviteOrRecovery;
-  if(isInviteOrRecovery||hasInviteOrRecoveryHash){
-    // Keep the complete Supabase callback on the page that sets the password.
-    window.location.replace("setup-password.html"+window.location.search+window.location.hash);
+const sb = window.supabase.createClient(PORTAL_CONFIG.url, PORTAL_CONFIG.key);
+const $ = id => document.getElementById(id);
+
+sb.auth.getUser().then(({data}) => { if (data && data.user) location.replace('dashboard.html'); });
+
+$('signin-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = $('email').value.trim(), password = $('password').value;
+  if (!email || !password) { $('msg').textContent = 'Enter your email and password.'; return; }
+  $('login').disabled = true; $('msg').textContent = 'Signing in...';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) {
+    $('msg').textContent = /fetch/i.test(error.message)
+      ? 'Could not reach the login service. Check your internet connection and try again.'
+      : 'Unable to sign in. Check your email and password, or ask the administrator for access.';
+    $('login').disabled = false;
     return;
   }
+  $('password').value = '';
+  location.replace('dashboard.html');
+});
 
-  const loginView=document.getElementById("login-view");
-  const resetView=document.getElementById("reset-view");
-  const showReset=document.getElementById("show-reset");
-  const loginMsg=document.getElementById("msg");
-  const resetMsg=document.getElementById("reset-msg");
-  const loginSubmit=document.getElementById("submit");
-  const sendReset=document.getElementById("send-reset");
-  const email=document.getElementById("email");
-  const resetEmail=document.getElementById("reset-email");
-  const password=document.getElementById("password");
-  let client;
+$('to-reset').addEventListener('click', () => {
+  $('reset-email').value = $('email').value.trim();
+  $('signin-view').hidden = true; $('reset-view').hidden = false;
+  $('reset-email').focus();
+});
+$('to-signin').addEventListener('click', () => {
+  $('email').value = $('reset-email').value.trim();
+  $('reset-view').hidden = true; $('signin-view').hidden = false;
+});
 
-  function openReset(){
-    resetEmail.value=email.value.trim();
-    loginView.hidden=true;
-    resetView.hidden=false;
-    showReset.setAttribute("aria-expanded","true");
-    resetEmail.focus();
-  }
-  function openLogin(){
-    resetView.hidden=true;
-    loginView.hidden=false;
-    showReset.setAttribute("aria-expanded","false");
-    email.focus();
-  }
-  showReset.addEventListener("click",openReset);
-  document.getElementById("back-to-login").addEventListener("click",openLogin);
-
-  if(!window.supabase||typeof window.supabase.createClient!=="function"){
-    loginMsg.textContent="The sign-in service did not load. Check your internet connection, then refresh this page.";
-    resetMsg.textContent="The sign-in service did not load. Check your internet connection, then refresh this page.";
-    loginSubmit.disabled=true;
-    sendReset.disabled=true;
-    return;
-  }
-
-  try{
-    client=window.supabase.createClient(
-      "https://enapawxhzizzefnfebco.supabase.co",
-      "sb_publishable_9xZHzw1SFJVqTAcQuxic8w_sWhNqS1N"
-    );
-  }catch(error){
-    loginMsg.textContent="The sign-in service could not start. Refresh the page and try again.";
-    resetMsg.textContent="The sign-in service could not start. Refresh the page and try again.";
-    loginSubmit.disabled=true;
-    sendReset.disabled=true;
-    return;
-  }
-
-  function showSession(user){
-    loginMsg.textContent="You are already signed in as "+(user.email||"your account")+". Set a password or open your dashboard.";
-    document.getElementById("session-actions").hidden=false;
-  }
-
-  client.auth.onAuthStateChange((event,session)=>{
-    if(event==="PASSWORD_RECOVERY"||(session?.user&&isInviteOrRecovery)){
-      window.location.replace("setup-password.html");
-    }
-  });
-
-  client.auth.getSession().then(({data,error})=>{
-    if(error){loginMsg.textContent="Could not check your sign-in session. You can still sign in below.";return;}
-    if(data?.session?.user)showSession(data.session.user);
-  }).catch(()=>{
-    loginMsg.textContent="Could not check your sign-in session. You can still sign in below.";
-  });
-
-  document.getElementById("login-form").addEventListener("submit",async event=>{
-    event.preventDefault();
-    loginSubmit.disabled=true;
-    loginMsg.textContent="Signing in...";
-    try{
-      const {data,error}=await client.auth.signInWithPassword({email:email.value.trim(),password:password.value});
-      if(error)throw error;
-      if(!data?.user)throw new Error("No account was returned. Try again or request a password email.");
-      window.location.replace("dashboard.html");
-    }catch(error){
-      loginMsg.textContent="Sign-in failed: "+(error?.message||"Check your email and password, or request a password email.");
-    }finally{
-      loginSubmit.disabled=false;
-    }
-  });
-
-  document.getElementById("reset-form").addEventListener("submit",async event=>{
-    event.preventDefault();
-    sendReset.disabled=true;
-    resetMsg.textContent="Sending password email...";
-    try{
-      const {error}=await client.auth.resetPasswordForEmail(resetEmail.value.trim(),{
-        redirectTo:"https://farrahrp.github.io/Creationsbydigitalph_Dashboard/setup-password.html"
-      });
-      if(error)throw error;
-      resetMsg.textContent="If an account exists, a password reset email has been sent. Open its link to choose a new password, then return here to sign in.";
-    }catch(error){
-      resetMsg.textContent="Could not send the password email: "+(error?.message||"Please try again later.");
-    }finally{
-      sendReset.disabled=false;
-    }
-  });
-})();
+$('reset-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = $('reset-email').value.trim();
+  if (!email) { $('reset-msg').textContent = 'Enter your account email.'; return; }
+  $('send-reset').disabled = true; $('reset-msg').textContent = 'Requesting password email...';
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: PORTAL_CONFIG.site });
+  $('reset-msg').textContent = error
+    ? 'Could not send the password email: ' + error.message
+    : 'If this address has an account, you will receive a password email. Check your inbox and spam folder.';
+  $('send-reset').disabled = false;
+});
 </script>
 </body>
 </html>

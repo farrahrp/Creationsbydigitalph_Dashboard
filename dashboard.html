@@ -1,5 +1,224 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Client Dashboard</title><style>body{font:16px Arial;margin:0;color:#202020;background:white}header{padding:24px;border-bottom:1px solid #ddd}main{max-width:850px;margin:55px auto;padding:0 24px}h1{font:50px Impact,Arial}h1 em{color:#cf2027;font-style:normal}section{border:1px solid #ddd;padding:24px;margin:20px 0}button{background:#cf2027;color:#fff;border:0;padding:12px 22px;cursor:pointer}</style></head><body><header>CREATIONS by Digital PH</header><main><h1>Your <em>workspace.</em></h1><p id="account">Checking account...</p><button id="signout">Sign out</button><section><h2>Assigned client workspaces</h2><div id="list">Checking...</div></section><section><h2>Content Approvals · Business Support · Campaigns</h2><p>The private content database and Notion calendar are not connected yet. Your workspace assignments are shown above.</p></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
-const sb=window.supabase.createClient("https://enapawxhzizzefnfebco.supabase.co","sb_publishable_9xZHzw1SFJVqTAcQuxic8w_sWhNqS1N");
-async function start(){const {data:{user},error}=await sb.auth.getUser();if(error||!user){location.replace("login.html");return;}document.getElementById("account").textContent="Signed in as "+(user.email||"account");const {data,error:e}=await sb.from("client_memberships").select("client_id,role,clients(name)").eq("user_id",user.id);const list=document.getElementById("list");list.replaceChildren();if(e){list.textContent="Workspace access cannot be loaded yet. Contact the administrator.";return;}if(!data?.length){list.textContent="No workspace assigned yet.";return;}for(const m of data){const p=document.createElement("p");p.textContent=(m.clients?.name||"Client")+" — "+m.role;list.append(p);}}
-document.getElementById("signout").onclick=async()=>{await sb.auth.signOut();location.replace("login.html");};start();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Client Dashboard | Creations by Digital PH</title>
+<style>
+:root{--red:#cf2027;--dark:#a8181e;--ink:#202020;--muted:#666;--line:#e7e7e7;--soft:#fff3f3}
+*{box-sizing:border-box}
+body{font:16px/1.5 Arial,Helvetica,sans-serif;margin:0;color:var(--ink);background:#fff}
+header{padding:24px;border-bottom:1px solid var(--line);font:22px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}
+header i{font:italic 15px Georgia,serif;color:var(--red);margin-left:5px}
+main{max-width:900px;margin:45px auto;padding:0 24px}
+h1{font:50px/1.05 Impact,'Arial Narrow',sans-serif;font-weight:400;margin:0 0 12px}
+h1 em{color:var(--red);font-style:normal}
+h2{font:30px Impact,'Arial Narrow',sans-serif;font-weight:400;margin:0 0 6px}
+h3{font-size:18px;margin:26px 0 10px}
+section{border:1px solid var(--line);padding:24px;margin:22px 0}
+.sub{font-size:13px;color:var(--muted);margin:0 0 14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer}
+.primary,.secondary{padding:11px 18px;font-size:13px;font-weight:700;border:1px solid var(--red)}
+.primary{background:var(--red);color:#fff}.primary:hover{background:var(--dark)}
+.secondary{background:#fff;color:var(--dark)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #e99599;outline-offset:2px}
+.count{border:1px solid #edc5c7;color:var(--dark);font-size:12px;font-weight:700;padding:7px 12px;white-space:nowrap}
+.row{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;width:100%;text-align:left;background:#fff;border:1px solid var(--line);padding:14px 16px;margin-bottom:10px}
+.row:hover{border-color:var(--red);background:#fffafa}
+.kind{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--dark);text-transform:uppercase}
+.row strong{display:block;font-size:15px}
+.row small{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.status{display:inline-block;font-size:11px;background:#fff1e2;color:#8b571c;padding:6px 10px;white-space:nowrap}
+.status.approved,.status.completed{color:#206042;background:#e7f3ea}
+.status.revision{color:#a02f31;background:#fff0f0}
+.status.active{color:#4f527a;background:#edecfc}
+.empty{border:1px dashed var(--line);color:var(--muted);padding:20px;font-size:14px}
+.detail{border:1px solid var(--line);margin-top:18px}
+.detail-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:start;gap:14px}
+.detail-head h3{font:28px Impact,'Arial Narrow',sans-serif;font-weight:400;margin:4px 0 8px}
+.close{border:1px solid var(--line);background:#fff;padding:7px 10px}
+.detail-body{padding:20px}
+dl{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;font-size:14px;margin:0 0 14px}
+dt{color:var(--muted)}dd{margin:0}
+.label{font-size:11px;letter-spacing:.12em;color:var(--dark);text-transform:uppercase;font-weight:700;margin:16px 0 8px}
+.box{background:#fafafa;border:1px solid var(--line);padding:12px;white-space:pre-wrap;font-size:14px}
+textarea{width:100%;min-height:90px;padding:12px;border:1px solid #d3d3d3;font:inherit;resize:vertical}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.msg{font-size:13px;color:var(--muted);min-height:20px;margin:12px 0 0}
+.msg.err{color:var(--dark)}
+.note{font-size:12px;color:var(--muted);border-left:3px solid var(--red);background:#faf8f8;padding:12px 14px}
+@media(max-width:640px){h1{font-size:38px}.row{grid-template-columns:1fr}dl{grid-template-columns:1fr}section{padding:18px}}
+</style>
+</head>
+<body>
+<header>CREATIONS <i>by Digital Ph</i></header>
+<main>
+  <div class="top">
+    <h1>Your <em>workspace.</em></h1>
+    <button class="secondary" id="signout" type="button">Sign out</button>
+  </div>
+  <p id="account" class="sub">Checking account...</p>
+
+  <section aria-label="Client action required">
+    <div class="top">
+      <div><div class="kind">Your priority inbox</div><h2>Client Action Required</h2>
+      <p class="sub" style="margin:0">Items waiting for your review or decision. Select one to open it.</p></div>
+      <span class="count" id="count">0 items</span>
+    </div>
+    <div id="waiting" style="margin-top:16px">Loading...</div>
+    <div id="detail-slot"></div>
+  </section>
+
+  <section aria-label="Other items">
+    <h2>Other items</h2>
+    <p class="sub">Items you have already answered, and updates on work in progress.</p>
+    <div id="others">Loading...</div>
+  </section>
+
+  <section aria-label="Assigned client workspaces">
+    <h2>Assigned client workspaces</h2>
+    <div id="list">Checking...</div>
+  </section>
+
+  <p class="note">Your decisions are saved securely and your team can see them. Notion synchronization is not connected yet.</p>
+</main>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const sb = window.supabase.createClient(PORTAL_CONFIG.url, PORTAL_CONFIG.key);
+
+const statusLabel = {draft:'Draft',for_approval:'For approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
+const statusClass = {for_approval:'',approved:'approved',changes_requested:'revision',in_progress:'active',done:'completed'};
+const catLabel = {content_approval:'Content approval',business_support:'Business support',campaign:'Campaign decision'};
+
+const $ = id => document.getElementById(id);
+function el(tag, cls, text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined&&text!==null)n.textContent=text;return n}
+function fmtDate(d){return d?new Date(d+'T00:00:00').toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'}):'No date set'}
+function safeUrl(v){try{const u=new URL(v);return (u.protocol==='https:'||u.protocol==='http:')?u.href:null}catch(e){return null}}
+
+let tasks = [];
+let openId = null;
+let multiClient = false;
+
+function row(t){
+  const b = el('button','row'); b.type = 'button';
+  const body = el('div');
+  const client = multiClient && t.clients && t.clients.name ? t.clients.name + ' · ' : '';
+  body.append(
+    el('span','kind',catLabel[t.category]||'Item'),
+    el('strong',null,t.title),
+    el('small',null,client+(t.platform?t.platform+' · ':'')+fmtDate(t.due_date))
+  );
+  b.append(body, el('span','status '+(statusClass[t.status]||''), statusLabel[t.status]||t.status));
+  b.addEventListener('click',()=>{openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
+  return b;
+}
+
+function detail(t){
+  const d = el('div','detail');
+  const head = el('div','detail-head');
+  const l = el('div');
+  l.append(el('div','kind',catLabel[t.category]||''), el('h3',null,t.title), el('span','status '+(statusClass[t.status]||''), statusLabel[t.status]||t.status));
+  const close = el('button','close','✕ Close'); close.type='button';
+  close.addEventListener('click',()=>{openId=null;render()});
+  head.append(l, close);
+
+  const body = el('div','detail-body');
+  const dl = el('dl');
+  const field = (k,v)=>{if(v){dl.append(el('dt',null,k),el('dd',null,v))}};
+  field('Format',t.format); field('Platforms',t.platform); field('Date',fmtDate(t.due_date));
+  body.append(dl);
+  if(t.details) body.append(el('div','label','Details'), el('div','box',t.details));
+  const link = safeUrl(t.preview_url);
+  if(link){
+    const a = el('a',null,'Open the full preview ↗'); a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
+    a.style.display='inline-block'; a.style.marginTop='14px'; body.append(a);
+  }
+  if(t.client_feedback) body.append(el('div','label','Feedback on record'), el('div','box',t.client_feedback));
+
+  const msg = el('p','msg'); msg.setAttribute('role','status');
+
+  if(t.status==='for_approval'){
+    body.append(el('div','label','Your feedback'));
+    const ta = el('textarea'); ta.placeholder='Describe the changes you would like (required if you request changes)...';
+    const actions = el('div','actions');
+    const ok = el('button','primary','Approve'); const chg = el('button','secondary','Request changes');
+    ok.type = chg.type = 'button';
+    const send = async decision => {
+      const note = ta.value.trim();
+      msg.className='msg';
+      if(decision==='changes_requested' && !note){msg.className='msg err';msg.textContent='Please describe the changes you would like.';return}
+      ok.disabled = chg.disabled = true; msg.textContent='Saving...';
+      const r = await sb.rpc('respond_to_task',{p_task_id:t.id,p_decision:decision,p_note:note||null});
+      if(r.error){msg.className='msg err';msg.textContent='Could not save your decision. '+(r.error.message||'');ok.disabled=chg.disabled=false;return}
+      await loadTasks(decision==='approved'?'Approved. Your team can now see your decision.':'Changes requested. Your team can now see your note.');
+    };
+    ok.addEventListener('click',()=>send('approved'));
+    chg.addEventListener('click',()=>send('changes_requested'));
+    actions.append(ok,chg);
+    body.append(ta,actions);
+  }
+  body.append(msg);
+  d.append(head,body);
+  return d;
+}
+
+function render(flash){
+  const waiting = tasks.filter(t=>t.status==='for_approval');
+  const others = tasks.filter(t=>t.status!=='for_approval');
+  $('count').textContent = waiting.length+(waiting.length===1?' item':' items');
+
+  $('waiting').replaceChildren();
+  if(!waiting.length) $('waiting').append(el('div','empty','You are all caught up. No decisions are waiting.'));
+  waiting.forEach(t=>$('waiting').append(row(t)));
+
+  $('others').replaceChildren();
+  if(!others.length) $('others').append(el('div','empty','Nothing here yet.'));
+  others.forEach(t=>$('others').append(row(t)));
+
+  $('detail-slot').replaceChildren();
+  const open = tasks.find(t=>t.id===openId);
+  if(open){
+    const d = detail(open);
+    if(flash){const m=d.querySelector('.msg');if(m)m.textContent=flash}
+    $('detail-slot').append(d);
+  }
+}
+
+async function loadTasks(flash){
+  const r = await sb.from('portal_tasks').select('*, clients(name)').order('due_date',{ascending:true,nullsFirst:false});
+  if(r.error){
+    const msg = 'Your items are not ready yet. Please contact the portal administrator.';
+    $('waiting').replaceChildren(el('div','empty',msg));
+    $('others').replaceChildren();
+    $('count').textContent='0 items';
+    return;
+  }
+  tasks = r.data||[];
+  render(flash);
+}
+
+async function start(){
+  const {data:{user},error} = await sb.auth.getUser();
+  if(error||!user){location.replace('login.html');return}
+  $('account').textContent = 'Signed in as '+(user.email||'account');
+
+  const m = await sb.from('client_memberships').select('client_id,role,clients(name)').eq('user_id',user.id);
+  const list = $('list'); list.replaceChildren();
+  if(m.error){list.textContent='Workspace access cannot be loaded yet. Contact the administrator.'}
+  else if(!m.data||!m.data.length){list.textContent='No workspace assigned yet.'}
+  else{
+    multiClient = m.data.length>1;
+    m.data.forEach(x=>{const p=el('p',null,(x.clients&&x.clients.name?x.clients.name:'Client')+' · '+x.role);list.append(p)});
+  }
+  await loadTasks();
+}
+
+$('signout').onclick = async()=>{await sb.auth.signOut();location.replace('login.html')};
+start();
+</script>
+</body>
+</html>
