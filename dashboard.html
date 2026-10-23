@@ -48,7 +48,13 @@ button:disabled{opacity:.5;cursor:default}
 .filters button{padding:8px 12px;font-size:12px}
 .filters button[aria-pressed="true"]{border-color:var(--red);color:var(--dark);background:var(--soft)}
 .list{display:grid;gap:12px}
-.row{display:grid;grid-template-columns:var(--thumb) 1fr auto;gap:17px;padding:14px;background:#fff;border:1px solid var(--line);align-items:center;text-align:left;width:100%}
+.cols{display:grid;grid-template-columns:110px 1fr 180px 150px 100px;gap:16px;align-items:center}
+.listhead{padding:0 14px 8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);border-bottom:1px solid var(--line)}
+.row{padding:14px;background:#fff;border:1px solid var(--line);text-align:left;width:100%}
+.row .own,.row .due{font-size:13px;color:#444}
+.row .snote{display:block;margin-top:3px;font-size:12px;color:var(--muted);font-weight:400}
+.row .status{justify-self:start}
+.row .rk{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--dark);text-transform:uppercase}
 .row:hover{border-color:var(--red);background:#fffafa}
 .thumb{width:var(--thumb);height:calc(var(--thumb)*.8);background:#f7eded;display:grid;place-items:center;color:var(--dark);font-size:clamp(9px,1.1vw,12px);letter-spacing:-.01em;font-weight:700;text-align:center;padding:4px;overflow:hidden;line-height:1.15}
 .thumb.video{background:#2b1a1b;color:#fff}
@@ -74,7 +80,7 @@ textarea{width:100%;min-height:85px;padding:12px;border:1px solid #d3d3d3;resize
 .preview{display:inline-block;border:1px solid var(--red);padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;margin-top:4px}
 .note{padding:15px;border-left:3px solid var(--red);background:#faf8f8;color:#666;font-size:12px;margin-top:30px}
 footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-@media(max-width:700px){.wrap{width:min(100% - 30px,1160px)}.brand{font-size:21px}.brand i{font-size:14px}.row{grid-template-columns:var(--thumb) 1fr;gap:10px}.row .status{grid-column:2;justify-self:start}.inbox-item{grid-template-columns:1fr auto;padding:13px 16px;gap:8px}.kind{grid-column:1/-1}dl{grid-template-columns:1fr}}
+@media(max-width:700px){.wrap{width:min(100% - 30px,1160px)}.brand{font-size:21px}.brand i{font-size:14px}.listhead{display:none}.cols{grid-template-columns:1fr auto;gap:6px 12px}.row .rk,.row .rmain{grid-column:1/-1}.inbox-item{grid-template-columns:1fr auto;padding:13px 16px;gap:8px}.kind{grid-column:1/-1}dl{grid-template-columns:1fr}}
 
 .row>div,.inbox-item>div,.detail-head>div{min-width:0}
 .box,.title,.meta,.inbox-item strong,.inbox-item small,.detail-head h3,dd,.msg,.note{overflow-wrap:anywhere}
@@ -111,6 +117,7 @@ footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(
   <h2 class="area-title" id="area-title">Content Approvals</h2>
   <p class="sub" id="area-desc"></p>
   <div class="filters" id="filters" aria-label="Filter by status"></div>
+  <div class="listhead cols" aria-hidden="true"><span>Type</span><span>Item</span><span>Owner / Platform</span><span>Status</span><span>Due</span></div>
   <div class="list" id="list" aria-live="polite"></div>
   <div id="detail-slot"></div>
 
@@ -124,7 +131,7 @@ footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(
 const sb = window.supabase.createClient(PORTAL_CONFIG.url, PORTAL_CONFIG.key);
 const $ = id => document.getElementById(id);
 
-const statusLabel = {for_approval:'For approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
+const statusLabel = {for_approval:'Needs your approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
 const statusClass = {for_approval:'',approved:'approved',changes_requested:'changes',in_progress:'progress',done:'done'};
 const catLabel = {content_approval:'Content approval',business_support:'Business support',campaign:'Campaign decision',spark_submission:'Spark task submission',ai_dna:'AI DNA'};
 const TABSETS = {
@@ -132,7 +139,7 @@ const TABSETS = {
   'done-by-di-spark':[['content_approval','Content Approvals'],['spark_submission','Spark Task Submissions'],['ai_dna','AI DNA']]
 };
 const filtersByCat = {
-  content_approval:[['all','All content'],['for_approval','For Approval'],['approved','Approved Tasks'],['revision','Revision Requests']],
+  content_approval:[['all','All content'],['for_approval','Needs approval'],['approved','Approved Tasks'],['revision','Revision Requests']],
   business_support:[['all','All requests'],['for_approval','Needs Attention'],['in_progress','In Progress'],['done','Completed']],
   campaign:[['all','All campaigns'],['for_approval','Awaiting Feedback'],['in_progress','In Progress'],['done','Completed']],
   spark_submission:[['all','All tasks'],['done','Submitted'],['in_progress','Not submitted yet']],
@@ -175,10 +182,20 @@ function inboxRow(t){
   b.addEventListener('click',()=>{cat=t.category;filter='all';openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
   return b;
 }
+function shortDate(d){return d?new Date(d+'T00:00:00').toLocaleDateString('en-PH',{month:'short',day:'numeric'}):'No date'}
+function typeText(t){return t.format||({content_approval:'Content',business_support:'Request',campaign:'Campaign',spark_submission:'Spark task',ai_dna:'AI DNA'}[t.category])||'Item'}
+function statusNote(t){
+  const own=(t.status_note||'').trim(); if(own) return own;
+  if(t.category!=='content_approval') return '';
+  if(isRevision(t)) return 'Changes requested. Your team is working on it.';
+  if(t.status==='for_approval') return 'Needs your approval before it goes out.';
+  if(t.status==='approved') return 'Approved. Your team will schedule it.';
+  return '';
+}
 function listRow(t){
-  const b=el('button','row'); b.type='button';
-  const mid=el('div'); mid.append(el('h3','title',t.title),el('p','meta',metaText(t)));
-  b.append(el('div','thumb'+(t.format==='Reel'?' video':''),thumbText(t)),mid,pill(t));
+  const b=el('button','row cols'); b.type='button';
+  const mid=el('div','rmain'); mid.append(el('h3','title',t.title)); const sn=statusNote(t); if(sn) mid.append(el('span','snote',sn));
+  b.append(el('span','rk',typeText(t)),mid,el('span','own',t.platform||'Creations by Digital PH'),pill(t),el('span','due',shortDate(t.due_date)));
   b.addEventListener('click',()=>{openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
   return b;
 }
@@ -195,7 +212,7 @@ function detail(t){
   const field=(k,v)=>{if(v){dl.append(el('dt',null,k),el('dd',null,v))}};
   field('Format',t.format); field('Platforms',t.platform); field('Date',fmtDate(t.due_date));
   body.append(dl);
-  if(t.details) body.append(el('div','label','Captions'),el('div','box',t.details));
+  if(t.details) body.append(el('div','label',t.category==='content_approval'?'Captions':'Details'),el('div','box',t.details));
   const link=safeUrl(t.preview_url), folder=safeUrl(t.folder_url);
   const isCarousel=t.format==='Carousel';
   if(link||folder){

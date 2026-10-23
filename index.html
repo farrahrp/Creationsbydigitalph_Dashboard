@@ -5,41 +5,75 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Client Workspace | Creations by Digital PH</title>
 <style>
-:root{--red:#cf2027;--dark:#a8181e;--ink:#202020;--muted:#666;--line:#e7e7e7}
+:root{--red:#cf2027;--dark:#a8181e;--ink:#202020;--muted:#666;--line:#e7e7e7;--soft:#fff3f3}
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}
 a{color:var(--dark)}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #e99599;outline-offset:2px}
 .wrap{width:min(1160px,calc(100% - 48px));margin:auto}
 header{border-bottom:1px solid var(--line)}
 .top{display:flex;min-height:80px;align-items:center;justify-content:space-between;gap:20px}
 .brand{font:26px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}
 .brand i{font:italic 17px Georgia,serif;color:var(--red);margin-left:5px}
 .actions{display:flex;align-items:center;gap:14px}
-.chip{border:1px solid #edc5c7;color:var(--dark);padding:7px 12px;font-size:11px}
-.btn{display:inline-block;padding:11px 23px;border:1px solid var(--red);background:var(--red);color:#fff;font-weight:700;font-size:13px;text-decoration:none}
+.chip{border:1px solid #edc5c7;color:var(--dark);padding:7px 12px;font-size:11px;white-space:nowrap}
+.btn{display:inline-block;padding:11px 23px;border:1px solid var(--red);background:var(--red);color:#fff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
 .btn:hover{background:var(--dark)}
+.btn.secondary{background:#fff;color:var(--dark)}.btn.secondary:hover{background:var(--soft)}
 .small{color:var(--dark);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
-.hero{padding:65px 0 35px}
+.hero{padding:55px 0 25px}
 h1,h2{font-family:Impact,'Arial Narrow',sans-serif;font-weight:400;letter-spacing:.012em}
-h1{font-size:clamp(44px,6vw,78px);line-height:1.02;margin:10px 0 15px}
+h1{font-size:clamp(40px,6vw,72px);line-height:1.02;margin:10px 0 15px}
 h1 span{color:var(--red)}
-.hero p{max-width:650px;font-size:16px;color:var(--muted);margin:0}
+.hero p{max-width:680px;font-size:16px;color:var(--muted);margin:0}
 .preview{padding:17px 0 75px}
-.ptitle{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}
+.ptitle{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:6px}
 .ptitle h2{font-size:34px;margin:0}.ptitle p{color:var(--muted);font-size:13px;margin:4px 0 0}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px;margin:20px 0 26px}
-.tabs span{border:1px solid var(--line);padding:10px 15px;font-size:13px;font-weight:700}
-.tabs span:first-child{background:var(--red);border-color:var(--red);color:#fff}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px;margin:20px 0 0}
+.tabs button{border:1px solid var(--line);background:#fff;padding:11px 16px;font-size:13px;font-weight:700;color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.area{font-size:13px;color:var(--muted);margin:14px 0 12px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 16px}
+.filters button{border:1px solid var(--line);background:#fff;padding:8px 12px;font-size:12px;font-weight:700;color:var(--ink)}
+.filters button[aria-pressed="true"]{border-color:var(--red);color:var(--dark);background:var(--soft)}
 .list{display:grid;gap:12px}
-.row{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:15px;border:1px solid var(--line)}
-.thumb{width:76px;height:62px;background:#f8ebeb;color:var(--dark);display:grid;place-items:center;font-size:10px;font-weight:700;text-align:center}
-.row strong{display:block}.row small{color:var(--muted);display:block;margin-top:4px}
-.status{display:inline-block;font-size:11px;background:#fff1e2;color:#8b571c;padding:6px 10px;white-space:nowrap}
+.item{border:1px solid var(--line);background:#fff}
+.item:hover{border-color:var(--red)}
+.cols{display:grid;grid-template-columns:110px 1fr 190px 150px 90px;gap:16px;align-items:center}
+.head{padding:0 15px 8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);border-bottom:1px solid var(--line)}
+.row{padding:15px;width:100%;text-align:left;background:none;border:0}
+.row .kind{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--dark);text-transform:uppercase}
+.row .own,.row .due{font-size:13px;color:#444}
+.row strong{display:block;font-size:15px}.row small{color:var(--muted);display:block;margin-top:4px;font-size:12px}
+.note{display:block;margin-top:6px;font-size:13px;color:#444}
+.status{justify-self:start;display:inline-block;font-size:11px;background:#fff1e2;color:#8b571c;padding:6px 10px;white-space:nowrap}
 .status.ok{color:#206042;background:#e7f3ea}
-.foot{margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}
-.foot p{font-size:12px;color:var(--muted);margin:0}
+.status.changes{color:#a02f31;background:#fff0f0}
+.status.progress{color:#4f527a;background:#edecfc}
+.detail{border-top:1px solid var(--line);padding:16px 18px;background:#fffafa}
+.detail p{margin:0 0 12px;font-size:13px;color:#444}
+.detail textarea{width:100%;min-height:70px;border:1px solid var(--line);padding:10px;font:inherit;font-size:13px;margin-bottom:10px}
+.actions-row{display:flex;gap:10px;flex-wrap:wrap}
+.msg{font-size:12px;color:#206042;margin:10px 0 0;font-weight:700}
+.foot{margin-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}
+.foot p{font-size:12px;color:var(--muted);margin:0;max-width:620px}
 footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-@media(max-width:650px){.brand{font-size:19px}.brand i{font-size:12px}.hero{padding:35px 0 25px}.row{grid-template-columns:60px 1fr;gap:10px}.thumb{width:60px;height:60px}.row .status{grid-column:2;justify-self:start}.ptitle h2{font-size:28px}}
+@media(max-width:700px){
+  .wrap{width:calc(100% - 32px)}
+  .brand{font-size:19px}.brand i{font-size:12px}
+  .actions .chip{display:none}
+  .hero{padding:35px 0 20px}
+  .ptitle{flex-direction:column;align-items:flex-start}.ptitle h2{font-size:28px}
+  .tabs{flex-wrap:nowrap;gap:6px}
+  .tabs button{flex:1 1 0;min-width:0;padding:10px 4px;font-size:12px;line-height:1.25;overflow-wrap:anywhere}
+  .filters{flex-wrap:nowrap;gap:5px}
+  .filters button{flex:1 1 0;min-width:0;padding:9px 3px;font-size:11.5px;line-height:1.25;overflow-wrap:anywhere}
+  .head{display:none}
+  .cols{grid-template-columns:1fr auto;gap:6px 12px}
+  .row .kind{grid-column:1/-1}
+  .row .item-main{grid-column:1/-1}
+}
 </style>
 </head>
 <body>
@@ -55,27 +89,102 @@ footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(
 <header>
   <div class="wrap top">
     <div class="brand">CREATIONS <i>by Digital Ph</i></div>
-    <div class="actions"><span class="chip">PORTAL PREVIEW</span><a class="btn" href="login.html">Log in</a></div>
+    <div class="actions"><span class="chip">DEMO PORTAL</span><a class="btn" href="login.html">Client login</a></div>
   </div>
 </header>
 <section class="wrap hero">
   <div class="small">Creations by Digital PH / Client Collaboration</div>
-  <h1>Your content. <span>Your decisions.</span></h1>
-  <p>One organized place to review upcoming posts, share feedback, and stay aligned on the work that matters.</p>
+  <h1>See where <span>everything stands.</span></h1>
+  <p>This is a demo portal with working sample tabs. Click around, open an item, and try approving it. No more chasing updates by email, just one calm place where you can see it all.</p>
 </section>
 <section class="wrap preview">
   <div class="ptitle">
-    <div><div class="small">PREVIEW YOUR CLIENT EXPERIENCE</div><h2>Your workspace</h2><p>Here's a glimpse of the tasks your team could manage in the portal.</p></div>
+    <div><div class="small">Preview your client experience</div><h2>Your workspace</h2><p>Every post, request and campaign, with its status, in one place.</p></div>
     <span class="chip">SAMPLE DATA</span>
   </div>
-  <div class="tabs" aria-label="Sample workspace categories"><span>Content Approvals</span><span>Business Support</span><span>Campaigns</span></div>
-  <div class="list">
-    <div class="row"><div class="thumb">CREATIVE</div><div><strong>Product Feature Spotlight</strong><small>Facebook &amp; Instagram · Example scheduled post</small></div><span class="status">For approval</span></div>
-    <div class="row"><div class="thumb">CAROUSEL</div><div><strong>Educational Carousel</strong><small>Facebook &amp; Instagram · Example review item</small></div><span class="status">For approval</span></div>
-    <div class="row"><div class="thumb">▶ REEL</div><div><strong>Quick Tips Reel</strong><small>Instagram · Example video review</small></div><span class="status ok">Approved</span></div>
-  </div>
-  <div class="foot"><p>Illustrative items only. Actual client content is never displayed publicly.</p><a class="btn" href="login.html">Log in to your workspace →</a></div>
+  <div class="tabs" role="tablist" aria-label="Sample workspace categories" id="tabs"></div>
+  <p class="area" id="area"></p>
+  <div class="filters" id="filters" aria-label="Filter sample items"></div>
+  <div class="head cols" aria-hidden="true"><span>Type</span><span>Item</span><span>Owner / Platform</span><span>Status</span><span>Due</span></div>
+  <div class="list" id="list"></div>
+  <div class="foot"><p>Sample client and sample items only. Nothing here is real client content, and nothing you click is saved or sent. Real client content is never shown publicly.</p><a class="btn" href="login.html">Log in to your workspace &rarr;</a></div>
 </section>
-<footer><div class="wrap">Creations by Digital PH · Client Workspace</div></footer>
+<footer><div class="wrap">Creations by Digital PH &middot; Client Workspace</div></footer>
+<script>
+// Sample data for a made-up client ("Sample Client Bakery"). Status keys: approval, changes, progress, done, published.
+var DATA = {
+  content: {
+    label: 'Content Approvals',
+    area: 'Review graphics, carousels and reels before they go live.',
+    filters: [['all','All'],['approval','Needs approval'],['progress','In progress'],['done','Published']],
+    items: [
+      {kind:'REEL', video:true, title:'Weekend Bake Along', owner:'Instagram', due:'Oct 28', status:'approval', note:'Needs your approval before it goes out.', detail:'Sample caption: Warm bread, a quiet Sunday and three simple steps. Save this for your next weekend bake.'},
+      {kind:'CAROUSEL', title:'5 Tips for Fresh Sourdough', owner:'Facebook & Instagram', due:'Oct 30', status:'approval', note:'Needs your approval before it goes out.', detail:'Sample caption: Five small habits that make a big difference to your loaf. Swipe to see all five.'},
+      {kind:'CREATIVE', title:'Meet the Baker', owner:'Facebook', due:'Nov 2', status:'progress', note:'Draft written. Photo requested.', detail:'The caption draft is ready. We are waiting on a clear photo of you in the kitchen before the graphic can be designed.'},
+      {kind:'CREATIVE', title:'Spring Launch Teaser', owner:'Facebook', due:'Oct 14', status:'done', note:'Published. Strong early engagement.', detail:'Posted on schedule. Comments and shares came in during the first hour.'}
+    ]
+  },
+  support: {
+    label: 'Business Support',
+    area: 'Email requests, account concerns, billing questions and other coordination.',
+    filters: [['all','All'],['approval','Needs attention'],['progress','In progress'],['done','Completed']],
+    items: [
+      {kind:'REQUEST', title:'Update opening hours on Facebook', owner:'Facebook', due:'Oct 22', status:'progress', note:'Request received. Waiting for your holiday hours.', detail:'Send us the hours you want shown and we will update the page the same day.'},
+      {kind:'REQUEST', title:'Approve monthly invoice', owner:'Billing', due:'Oct 31', status:'approval', note:'Needs your confirmation.', detail:'This is a sample billing item. In a real portal, the invoice link and your confirmation would be here.'},
+      {kind:'REQUEST', title:'Reply to a customer inquiry', owner:'Messenger', due:'Oct 12', status:'done', note:'Answered within the day.', detail:'Customer asked about custom cake orders. Reply sent using your approved wording.'}
+    ]
+  },
+  campaign: {
+    label: 'Campaigns',
+    area: 'Track campaign ideas, timelines and decisions.',
+    filters: [['all','All'],['approval','Awaiting feedback'],['progress','In progress'],['done','Completed']],
+    items: [
+      {kind:'CAMPAIGN', title:'Holiday Pre-Order Campaign', owner:'Creations by Digital PH', due:'Nov 1', status:'approval', note:'Plan ready. Needs your go-ahead on the offer.', detail:'Sample plan: three weeks of teaser posts, one reel, and a pre-order link in your page header.'},
+      {kind:'CAMPAIGN', title:'Grand Reopening Week', owner:'Creations by Digital PH', due:'Oct 12', status:'done', note:'Completed. Results summary shared.', detail:'Posts, stories and one reel ran as planned. A short results summary was added to your portal.'}
+    ]
+  }
+};
+var LABEL = {approval:'Needs your approval', changes:'Changes requested', progress:'In progress', done:'Published', ok:'Approved'};
+var CLS = {approval:'', changes:'changes', progress:'progress', done:'ok', ok:'ok'};
+var cur = 'content', flt = 'all', open = null;
+function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!==undefined&&x!==null)n.textContent=x;return n}
+function render(){
+  var tabs=document.getElementById('tabs'); tabs.textContent='';
+  Object.keys(DATA).forEach(function(k){
+    var b=el('button',null,DATA[k].label); b.type='button'; b.setAttribute('role','tab'); b.setAttribute('aria-selected',String(k===cur));
+    b.onclick=function(){cur=k;flt='all';open=null;render()}; tabs.append(b);
+  });
+  var d=DATA[cur]; document.getElementById('area').textContent=d.area;
+  var f=document.getElementById('filters'); f.textContent='';
+  d.filters.forEach(function(p){
+    var b=el('button',null,p[1]); b.type='button'; b.setAttribute('aria-pressed',String(p[0]===flt));
+    b.onclick=function(){flt=p[0];open=null;render()}; f.append(b);
+  });
+  var list=document.getElementById('list'); list.textContent='';
+  d.items.forEach(function(it,i){
+    if(flt!=='all' && it.status!==flt && !(flt==='done'&&it.status==='ok')) return;
+    var box=el('div','item');
+    var row=el('button','row cols'); row.type='button'; row.setAttribute('aria-expanded',String(open===i));
+    var mid=el('div','item-main'); mid.append(el('strong',null,it.title),el('span','note',it.note));
+    row.append(el('span','kind',it.kind),mid,el('span','own',it.owner),el('span','status '+(CLS[it.status]||''),LABEL[it.status]||it.status),el('span','due',it.due));
+    row.onclick=function(){open=(open===i?null:i);render()}; box.append(row);
+    if(open===i){
+      var dt=el('div','detail'); dt.append(el('p',null,it.detail));
+      if(it.status==='approval'){
+        var ta=el('textarea'); ta.placeholder='Sample feedback box. Type a change you would like, if any.'; ta.setAttribute('aria-label','Sample feedback');
+        var msg=el('p','msg'); msg.setAttribute('role','status');
+        var ok=el('button','btn','Approve'), ch=el('button','btn secondary','Request changes'); ok.type=ch.type='button';
+        ok.onclick=function(){it.status='ok';it.note='Approved. Your team can now schedule it.';open=null;render()};
+        ch.onclick=function(){it.status='changes';it.note='Changes requested. Your team has your note.';open=null;render()};
+        var ar=el('div','actions-row'); ar.append(ok,ch); dt.append(ta,ar,msg);
+      }
+      box.append(dt);
+    }
+    list.append(box);
+  });
+  if(!list.children.length) list.append(el('p','area','Nothing here in this view.'));
+}
+render();
+</script>
 </body>
 </html>
