@@ -25,6 +25,7 @@ h1 span{color:var(--red)}
 .sub{font-size:13px;color:var(--muted);margin:4px 0 0}
 main{padding:10px 0 70px}
 .btn{padding:11px 16px;font-size:12px;font-weight:700;border:1px solid var(--red)}
+a.btn{display:inline-block;text-decoration:none;white-space:nowrap}
 .primary{background:var(--red);color:#fff}.primary:hover{background:var(--dark)}
 .secondary{background:#fff;color:var(--dark)}
 button:disabled{opacity:.5;cursor:default}
@@ -52,6 +53,7 @@ button:disabled{opacity:.5;cursor:default}
 .listhead{padding:0 14px 8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);border-bottom:1px solid var(--line)}
 .row{padding:14px;background:#fff;border:1px solid var(--line);text-align:left;width:100%}
 .row .own,.row .due{font-size:13px;color:#444}
+.row .snote{display:block;margin-top:3px;font-size:12px;color:var(--muted);font-weight:400}
 .row .status{justify-self:start}
 .row .rk{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--dark);text-transform:uppercase}
 .row:hover{border-color:var(--red);background:#fffafa}
@@ -85,14 +87,14 @@ footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(
 .row>div,.inbox-item>div,.detail-head>div{min-width:0}
 .box,.title,.meta,.inbox-item strong,.inbox-item small,.detail-head h3,dd,.msg,.note{overflow-wrap:anywhere}
 .who{min-width:0}#account{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media(max-width:700px){.top{flex-wrap:wrap;min-height:0;padding:12px 0;gap:8px}.who{width:100%;justify-content:space-between;gap:10px}#account{flex:1}.hero{padding:26px 0 12px}.inbox-top{flex-wrap:wrap}.detail-head{padding:16px}.detail-body{padding:16px}.actions .btn{flex:1 1 140px}.tabs button{flex:1 1 auto}.filters{flex-wrap:nowrap;gap:5px}.filters button{flex:1 1 0;min-width:0;padding:9px 3px;font-size:11.5px;line-height:1.25;overflow-wrap:anywhere}.tabs:not(:has(button:nth-child(4))){flex-wrap:nowrap;gap:6px}.tabs:not(:has(button:nth-child(4))) button{flex:1 1 0;min-width:0;padding:10px 4px;font-size:12px;line-height:1.25;overflow-wrap:anywhere}}
+@media(max-width:700px){.top{flex-wrap:wrap;min-height:0;padding:12px 0;gap:8px}.who{width:100%;justify-content:flex-end;gap:8px}#account{display:none}.hero{padding:26px 0 12px}.inbox-top{flex-wrap:wrap}.detail-head{padding:16px}.detail-body{padding:16px}.actions .btn{flex:1 1 140px}.tabs button{flex:1 1 auto}.filters{flex-wrap:nowrap;gap:5px}.filters button{flex:1 1 0;min-width:0;padding:9px 3px;font-size:11.5px;line-height:1.25;overflow-wrap:anywhere}.tabs:not(:has(button:nth-child(4))){flex-wrap:nowrap;gap:6px}.tabs:not(:has(button:nth-child(4))) button{flex:1 1 0;min-width:0;padding:10px 4px;font-size:12px;line-height:1.25;overflow-wrap:anywhere}}
 </style>
 </head>
 <body>
 <div class="demo-banner">DEMO PREVIEW WITH SAMPLE DATA. Nothing here is a real client or real content. Try Approve and Request changes. Nothing is saved or sent to Notion; refresh the page to reset.</div>
 <header><div class="wrap top">
   <div class="brand">CREATIONS <i>by Digital Ph</i></div>
-  <div class="who"><span id="account">Checking account...</span><button class="btn secondary" id="signout" type="button">Reset demo</button></div>
+  <div class="who"><span id="account">Checking account...</span><button class="btn secondary" id="signout" type="button">Reset demo</button><a class="btn secondary" href="index.html">Home</a><a class="btn primary" href="login.html">Client login</a></div>
 </div></header>
 
 <section class="wrap hero">
@@ -150,11 +152,11 @@ const sb={
 
 const $ = id => document.getElementById(id);
 
-const statusLabel = {for_approval:'For approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
+const statusLabel = {for_approval:'Needs your approval',approved:'Approved',changes_requested:'Revision requested',in_progress:'In progress',done:'Completed'};
 const statusClass = {for_approval:'',approved:'approved',changes_requested:'changes',in_progress:'progress',done:'done'};
 const catLabel = {content_approval:'Content approval',business_support:'Business support',campaign:'Campaign decision'};
 const filtersByCat = {
-  content_approval:[['all','All content'],['for_approval','For Approval'],['approved','Approved Tasks'],['revision','Revision Requests']],
+  content_approval:[['all','All content'],['for_approval','Needs approval'],['approved','Approved Tasks'],['revision','Revision Requests']],
   business_support:[['all','All requests'],['for_approval','Needs Attention'],['in_progress','In Progress'],['done','Completed']],
   campaign:[['all','All campaigns'],['for_approval','Awaiting Feedback'],['in_progress','In Progress'],['done','Completed']]
 };
@@ -192,9 +194,17 @@ function inboxRow(t){
 }
 function shortDate(d){return d?new Date(d+'T00:00:00').toLocaleDateString('en-PH',{month:'short',day:'numeric'}):'No date'}
 function typeText(t){return t.format||({content_approval:'Content',business_support:'Request',campaign:'Campaign',spark_submission:'Spark task'}[t.category])||'Item'}
+function statusNote(t){
+  const own=(t.status_note||'').trim(); if(own) return own;
+  if(t.category!=='content_approval') return '';
+  if(isRevision(t)) return 'Changes requested. Your team is working on it.';
+  if(t.status==='for_approval') return 'Needs your approval before it goes out.';
+  if(t.status==='approved') return 'Approved. Your team will schedule it.';
+  return '';
+}
 function listRow(t){
   const b=el('button','row cols'); b.type='button';
-  const mid=el('div','rmain'); mid.append(el('h3','title',t.title));
+  const mid=el('div','rmain'); mid.append(el('h3','title',t.title)); const sn=statusNote(t); if(sn) mid.append(el('span','snote',sn));
   b.append(el('span','rk',typeText(t)),mid,el('span','own',t.platform||'Creations by Digital PH'),pill(t),el('span','due',shortDate(t.due_date)));
   b.addEventListener('click',()=>{openId=t.id;render();$('detail-slot').scrollIntoView({behavior:'smooth',block:'nearest'})});
   return b;
