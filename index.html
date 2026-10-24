@@ -17,6 +17,7 @@ header{border-bottom:1px solid var(--line)}
 .brand{font:26px Impact,'Arial Narrow',sans-serif;letter-spacing:.02em}
 .brand i{font:italic 17px Georgia,serif;color:var(--red);margin-left:5px}
 .actions{display:flex;align-items:center;gap:14px}
+a.chip{text-decoration:none;font-weight:700}a.chip:hover{background:var(--soft)}
 .chip{border:1px solid #edc5c7;color:var(--dark);padding:7px 12px;font-size:11px;white-space:nowrap}
 .btn{display:inline-block;padding:11px 23px;border:1px solid var(--red);background:var(--red);color:#fff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
 .btn:hover{background:var(--dark)}
@@ -62,7 +63,7 @@ footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(
 @media(max-width:700px){
   .wrap{width:calc(100% - 32px)}
   .brand{font-size:19px}.brand i{font-size:12px}
-  .actions .chip{display:none}
+  .actions{gap:8px}.actions .chip{padding:10px 9px;font-size:10px}.actions .btn{padding:10px 14px}
   .hero{padding:35px 0 20px}
   .ptitle{flex-direction:column;align-items:flex-start}.ptitle h2{font-size:28px}
   .tabs{flex-wrap:nowrap;gap:6px}
@@ -89,7 +90,7 @@ footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(
 <header>
   <div class="wrap top">
     <div class="brand">CREATIONS <i>by Digital Ph</i></div>
-    <div class="actions"><span class="chip">DEMO PORTAL</span><a class="btn" href="login.html">Client login</a></div>
+    <div class="actions"><a class="chip" href="demo.html">VIEW DEMO</a><a class="btn" href="login.html">Client login</a></div>
   </div>
 </header>
 <section class="wrap hero">
